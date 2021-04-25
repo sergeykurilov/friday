@@ -1,4 +1,4 @@
-import {INCREMENT} from "../constants/constants";
+import {INCREMENT, DECREMENT, SET_USERS} from "../constants/constants";
 
 
 export const Increase = () => {
@@ -7,9 +7,15 @@ export const Increase = () => {
     };
 };
 
+export const Decrease = () => {
+    return {
+        type: DECREMENT,
+    };
+};
+
 export function requestUsersAction(users:any) {
     return {
-        type: "SET_USERS",
+        type: SET_USERS,
         users
     };
 }

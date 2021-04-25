@@ -18,7 +18,7 @@ export const PATH = {
 
 
 
-export default function Example() {
+export function Navigation() {
     return (
             <Disclosure as="nav" className="bg-white shadow">
                 {({open}) => (
