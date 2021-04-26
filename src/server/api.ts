@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export const instance = axios.create({
-    baseURL: "https://cards-nya-back.herokuapp.com/1.0/",
+    baseURL: "https://neko-back.herokuapp.com/2.0/",
 });
 
 export const usersAPI = {
@@ -14,5 +14,11 @@ export const usersAPI = {
                 return err.message
             })
     },
+   // registerUsers(){
+   //      return instance
+   //          .post(`auth/register`)
+   //          .then(res => res.data)
+   //          .catch(err => err.message)
+   // }
 };
 

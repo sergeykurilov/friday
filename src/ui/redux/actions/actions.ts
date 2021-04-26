@@ -1,17 +1,5 @@
-import {INCREMENT, DECREMENT, SET_USERS} from "../constants/constants";
+import {SET_USERS, USER_REGISTER} from "../constants/constants";
 
-
-export const Increase = () => {
-    return {
-        type: INCREMENT,
-    };
-};
-
-export const Decrease = () => {
-    return {
-        type: DECREMENT,
-    };
-};
 
 export function requestUsersAction(users:any) {
     return {
@@ -19,3 +7,12 @@ export function requestUsersAction(users:any) {
         users
     };
 }
+
+export const userRegister = (isEmail:boolean,isPassValid: boolean) => ({
+        type: USER_REGISTER, payload: {isEmail,isPassValid} } as const )
+
+export const userRegisterLoading = (loading: boolean) => ({
+    type: USER_REGISTER, payload: {loading} } as const )
+
+export const userRegisterError = (error: string) => ({
+    type: USER_REGISTER, payload: {error} } as const )
