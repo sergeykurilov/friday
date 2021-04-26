@@ -5,15 +5,18 @@ import Registration from '../screens/Registration/Registration';
 import {PATH} from "../components/Nav/Navigation";
 import {ResetPassword} from "../screens/ResetPassword/ResetPassword";
 import {ForgotPassword} from "../screens/ForgotPassword/ForgotPassoword";
+import PrivateRoute from "./PrivateRoute";
 
 
 export default function Routing() {
+    //ajsdnjadnjad
     return (
         <div className="app-wrapper">
             <div className="app-wrapper-content">
+
                 <BrowserRouter>
                     <Switch>
-
+                        {/*<PrivateRoute component={Login} path={PATH.DEFAULT}/>*/}
                         <Route exact component={Login} path={PATH.DEFAULT}/>
                         <Route exact component={Registration} path={PATH.REGISTER}/>
                         <Route
