@@ -1,4 +1,5 @@
 import {ActionTypes, } from "../constants/constants";
+import {RequestStatusType} from "../reducers/registration/registration-reducer";
 
 
 // export function requestUsersAction(users:any) {
@@ -8,11 +9,14 @@ import {ActionTypes, } from "../constants/constants";
 //     };
 // }
 
-export const userRegister = (isEmail:boolean,isPassValid: boolean) => ({
-        type: ActionTypes.USER_REGISTER, payload: {isEmail,isPassValid} } as const )
+export const userRegister = ( email: string,password: string) => ({
+        type: ActionTypes.USER_REGISTER, payload: {email,password} } as const )
 
-export const userRegisterLoading = (loading: boolean) => ({
-    type: ActionTypes.USER_REGISTER_LOADING, payload: {loading} } as const )
+export const userRegisterLoading = (isAuth: boolean) => ({
+    type: ActionTypes.USER_REGISTER_IS_AUTH, payload: {isAuth} } as const )
 
 export const userRegisterError = (error: string) => ({
     type: ActionTypes.USER_REGISTER_ERROR, payload: {error} } as const )
+
+export const userRegisterStatus = (status: RequestStatusType) => ({
+    type: ActionTypes.USER_REGISTER_STATUS, payload: {status} } as const )

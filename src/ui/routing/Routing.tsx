@@ -9,7 +9,6 @@ import PrivateRoute from "./PrivateRoute";
 
 
 export default function Routing() {
-    //ajsdnjadnjad
     return (
         <div className="app-wrapper">
             <div className="app-wrapper-content">
