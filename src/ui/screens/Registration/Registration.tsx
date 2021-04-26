@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {PATH} from "../../components/Nav/Navigation";
 import {useSelector} from "react-redux";
+import {RootStateType} from "../../redux/store/store";
 
 
 export default function Registration() {
 
-   // const loading = useSelector()
 
 
     return (

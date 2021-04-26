@@ -1,33 +1,24 @@
-import {
-    DECREMENT,
-    INCREMENT,
-    SET_USERS,
-    USER_REGISTER,
-    USER_REGISTER_LOADING,
-    USER_REGISTER_ERROR
-} from "../../constants/constants";
 import {userRegister, userRegisterError, userRegisterLoading} from "../../actions/actions";
+import {ActionTypes} from "../../constants/constants";
 
-const INITIAL_STATE = {
-    users: [],
+
+const initialState: InitialStateType = {
     isEmail: false,
     isPassValid: false,
     loading: false,
-    error: null
+    error: null as null | string
 };
 
-export const registrationReducer = (state = INITIAL_STATE, action: ActionsType) => {
+export const registrationReducer = (state = initialState, action: ActionsType): InitialStateType => {
 
     switch (action.type) {
-        case SET_USERS:
-            return { ...state, users: action.users };
-        case USER_REGISTER:
+        case ActionTypes.USER_REGISTER:
             return {
                 ...state, ...action.payload }
-        case USER_REGISTER_LOADING:
+        case ActionTypes.USER_REGISTER_LOADING:
             return {
                 ...state, ...action.payload }
-        case USER_REGISTER_ERROR:
+        case ActionTypes.USER_REGISTER_ERROR:
             return {
                 ...state, ...action.payload }
         default:
@@ -36,8 +27,13 @@ export const registrationReducer = (state = INITIAL_STATE, action: ActionsType) 
     }
 };
 
-export type ActionsType = RegisterUserActionType | RegisterUserLoadingActionType | RegisterUserErrorActionType | any
+export type ActionsType = RegisterUserActionType | RegisterUserLoadingActionType | RegisterUserErrorActionType
 type RegisterUserActionType = ReturnType<typeof userRegister>
 type RegisterUserLoadingActionType = ReturnType<typeof userRegisterLoading>
 type RegisterUserErrorActionType = ReturnType<typeof userRegisterError>
-
+export type InitialStateType = {
+    isEmail: boolean
+    isPassValid: boolean
+    loading: boolean
+    error: null | string
+}
