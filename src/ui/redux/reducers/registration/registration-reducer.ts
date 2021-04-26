@@ -2,7 +2,7 @@ import {userRegister, userRegisterError, userRegisterLoading, userRegisterStatus
 import {ActionTypes} from "../../constants/constants";
 
 
-const initialState: InitialStateType = {
+const initialState = {
     email: "",
     password: "",
     status: 'loading' as RequestStatusType,
@@ -10,7 +10,7 @@ const initialState: InitialStateType = {
     error: null as null | string
 };
 
-export const registrationReducer = (state = initialState, action: ActionsType): InitialStateType => {
+export const registrationReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
     switch (action.type) {
         case ActionTypes.USER_REGISTER:
@@ -44,11 +44,5 @@ type RegisterUserIsAuthActionType = ReturnType<typeof userRegisterLoading>
 type RegisterUserErrorActionType = ReturnType<typeof userRegisterError>
 type RegisterUserStatusActionType = ReturnType<typeof userRegisterStatus>
 
-export type InitialStateType = {
-    email: string
-    password: string
-    isAuth: boolean
-    error: null | string
-    status: RequestStatusType
-}
+export type InitialStateType = typeof initialState
 export type RequestStatusType = 'loading' | 'succeeded' | 'failed'
