@@ -3,7 +3,6 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Decrease, Increase} from "../../redux/actions/actions";
 import {requestUser} from "../../redux/thunk/registration/registration-thunk";
-import {Navigation} from "../../components/Nav/Navigation";
 
 export function Login(props:any) {
 
@@ -15,7 +14,6 @@ export function Login(props:any) {
 
     return (
         <div>
-            <Navigation/>
             <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div>Count: {count}</div>
                 <div>{Object.keys(users)}</div>

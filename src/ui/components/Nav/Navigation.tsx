@@ -12,7 +12,7 @@ function classNames(...classes: string[]) {
 export const PATH = {
     DEFAULT: '/',
     LOGIN: "/login",
-    RESET: "/reset",
+    RESET: "/forgotpassword",
     REGISTER: "/register"
 }
 
