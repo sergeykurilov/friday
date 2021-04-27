@@ -9,11 +9,8 @@ import {RequestStatusType} from "../reducers/registration/registration-reducer";
 //     };
 // }
 
-export const userRegister = ( email: string,password: string) => ({
-        type: ActionTypes.USER_REGISTER, payload: {email,password} } as const )
-
-export const userRegisterLoading = (isAuth: boolean) => ({
-    type: ActionTypes.USER_REGISTER_IS_AUTH, payload: {isAuth} } as const )
+export const userRegister = ( isRegistration: boolean) => ({
+        type: ActionTypes.USER_REGISTER, payload: {isRegistration} } as const )
 
 export const userRegisterError = (error: string) => ({
     type: ActionTypes.USER_REGISTER_ERROR, payload: {error} } as const )

@@ -10,7 +10,7 @@ export default function Registration() {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    const isAuth = useSelector<RootStateType,boolean>(registration => registration.registration.isAuth)
+    const isRegistration = useSelector<RootStateType,boolean>(registration => registration.registration.isRegistration)
     const status = useSelector<RootStateType,RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export default function Registration() {
 
     // isAuth && <Redirect to={PATH.LOGIN}/>
 
-    if(isAuth){
+    if(isRegistration){
         return <Redirect to={PATH.LOGIN}/>
     }
 

@@ -3,11 +3,11 @@ import {Dispatch} from "redux";
 import {ActionsType} from "../../reducers/registration/registration-reducer";
 import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
 
-/*export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
+export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
    dispatch(userRegisterStatus("loading"))
     registerAPI.registerUsers({...regData})
         .then((res) => {
-            dispatch(userRegister(res.data))
+            dispatch(userRegister(true))
             dispatch(userRegisterStatus("succeeded"))
         })
         .catch((err) => {
@@ -17,7 +17,7 @@ import {userRegister, userRegisterError, userRegisterStatus} from "../../actions
                 dispatch(userRegisterError(err.response.data.error))
             }
         })
-}*/
+}
 
 export type RegistrationRequestType = {
     email: string
@@ -25,17 +25,19 @@ export type RegistrationRequestType = {
 }
 
 export type RegistrationResponseType = {
-    _id: string
-    email: string
-    name: string
-    avatar?: string
-    publicCardPacksCount: number
-    created: Date
-    updated: Date
-    isAdmin: boolean
-    verified: boolean
-    rememberMe: boolean
-    error?: string
+    addedUser: {
+        _id: string
+        email: string
+        name: string
+        avatar?: string
+        publicCardPacksCount: number
+        created: Date
+        updated: Date
+        isAdmin: boolean
+        verified: boolean
+        rememberMe: boolean
+        error?: string
+    }
 }
 
 export type RegistrationUserErrorType = {
