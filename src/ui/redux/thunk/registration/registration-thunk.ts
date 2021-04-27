@@ -1,10 +1,23 @@
 import {registerAPI} from "../../../../server/api";
 import {Dispatch} from "redux";
 import {ActionsType} from "../../reducers/registration/registration-reducer";
+import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
 
-export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
-
-}
+/*export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
+   dispatch(userRegisterStatus("loading"))
+    registerAPI.registerUsers({...regData})
+        .then((res) => {
+            dispatch(userRegister(res.data))
+            dispatch(userRegisterStatus("succeeded"))
+        })
+        .catch((err) => {
+            dispatch(userRegisterStatus("loading"))
+            if(err.response.data.in === "createUser"){
+                dispatch(userRegisterStatus("failed"))
+                dispatch(userRegisterError(err.response.data.error))
+            }
+        })
+}*/
 
 export type RegistrationRequestType = {
     email: string
