@@ -24,7 +24,8 @@ export default function Registration() {
     }
 
     const onRegistrationCallback = () => {
-        dispatch(userRegistrationTC({email, password}))
+       dispatch(userRegistrationTC({email, password}))
+       //  console.log("vse rabotaet")
     }
 
     // isAuth && <Redirect to={PATH.LOGIN}/>
