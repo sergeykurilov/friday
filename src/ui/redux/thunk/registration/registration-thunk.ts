@@ -4,7 +4,7 @@ import {ActionsType} from "../../reducers/registration/registration-reducer";
 import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
 
 export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
-   dispatch(userRegisterStatus("loading"))
+    dispatch(userRegisterStatus("loading"))
     registerAPI.registerUsers({...regData})
         .then((res) => {
             dispatch(userRegister(true))
@@ -12,7 +12,7 @@ export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatc
         })
         .catch((err) => {
             dispatch(userRegisterStatus("loading"))
-            if(err.response.data.in === "createUser"){
+            if (err.response.data.in === "createUser") {
                 dispatch(userRegisterStatus("failed"))
                 dispatch(userRegisterError(err.response.data.error))
             }

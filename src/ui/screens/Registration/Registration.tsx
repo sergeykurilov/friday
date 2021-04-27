@@ -3,15 +3,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store/store";
 import {RequestStatusType} from "../../redux/reducers/registration/registration-reducer";
 import {Redirect} from "react-router-dom";
-import { PATH } from '../../components/Nav/Navigation';
+import {PATH} from '../../components/Nav/Navigation';
+import {userRegistrationTC} from "../../redux/thunk/registration/registration-thunk";
 
 
 export default function Registration() {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    const isRegistration = useSelector<RootStateType,boolean>(registration => registration.registration.isRegistration)
-    const status = useSelector<RootStateType,RequestStatusType>(registration => registration.registration.status)
+    const isRegistration = useSelector<RootStateType, boolean>(registration => registration.registration.isRegistration)
+    const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
 
     const onChangeEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +23,13 @@ export default function Registration() {
         setPassword(e.currentTarget.value)
     }
 
+    const onRegistrationCallback = () => {
+        dispatch(userRegistrationTC({email, password}))
+    }
+
     // isAuth && <Redirect to={PATH.LOGIN}/>
 
-    if(isRegistration){
+    if (isRegistration) {
         return <Redirect to={PATH.LOGIN}/>
     }
 
@@ -104,6 +109,7 @@ export default function Registration() {
                                 type="submit"
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 disabled={status === "loading"}
+                                onClick={onRegistrationCallback}
                             >
                                 Sign up
                             </button>
