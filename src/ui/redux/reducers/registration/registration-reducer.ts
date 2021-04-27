@@ -1,43 +1,40 @@
-import {
-    DECREMENT,
-    INCREMENT,
-    SET_USERS,
-    USER_REGISTER,
-    USER_REGISTER_LOADING,
-    USER_REGISTER_ERROR
-} from "../../constants/constants";
-import {userRegister, userRegisterError, userRegisterLoading} from "../../actions/actions";
+import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {ActionTypes} from "../../constants/constants";
 
-const INITIAL_STATE = {
-    users: [],
-    isEmail: false,
-    isPassValid: false,
-    loading: false,
-    error: null
+
+const initialState = {
+    status: 'loading' as RequestStatusType,
+    error: null as null | string,
+    isRegistration: false
 };
 
-export const registrationReducer = (state = INITIAL_STATE, action: ActionsType) => {
+export const registrationReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
     switch (action.type) {
-        case SET_USERS:
-            return { ...state, users: action.users };
-        case USER_REGISTER:
+        case ActionTypes.USER_REGISTER:
             return {
-                ...state, ...action.payload }
-        case USER_REGISTER_LOADING:
+                ...state, ...action.payload
+            }
+        case ActionTypes.USER_REGISTER_ERROR:
             return {
-                ...state, ...action.payload }
-        case USER_REGISTER_ERROR:
+                ...state, ...action.payload
+            }
+        case ActionTypes.USER_REGISTER_STATUS:
             return {
-                ...state, ...action.payload }
+                ...state, ...action.payload
+            }
         default:
             return state;
 
     }
 };
 
-export type ActionsType = RegisterUserActionType | RegisterUserLoadingActionType | RegisterUserErrorActionType | any
+export type ActionsType = RegisterUserActionType
+    | RegisterUserErrorActionType
+    | RegisterUserStatusActionType
 type RegisterUserActionType = ReturnType<typeof userRegister>
-type RegisterUserLoadingActionType = ReturnType<typeof userRegisterLoading>
 type RegisterUserErrorActionType = ReturnType<typeof userRegisterError>
+type RegisterUserStatusActionType = ReturnType<typeof userRegisterStatus>
 
+export type InitialStateType = typeof initialState
+export type RequestStatusType = 'loading' | 'succeeded' | 'failed'
