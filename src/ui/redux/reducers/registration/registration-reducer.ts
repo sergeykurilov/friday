@@ -1,24 +1,40 @@
-import {DECREMENT, INCREMENT, SET_USERS} from "../../constants/constants";
+import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {ActionTypes} from "../../constants/constants";
 
-const INITIAL_STATE = {
-    count: 0,
-    users: []
+
+const initialState = {
+    status: 'loading' as RequestStatusType,
+    error: null as null | string,
+    isRegistration: false
 };
 
-export const reducer = (state = INITIAL_STATE, action: any) => {
+export const registrationReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
     switch (action.type) {
-        case SET_USERS:
-            return { ...state, users: action.users };
-        case DECREMENT:
-            return {...state,count: state.count - 1}
-        case INCREMENT:
+        case ActionTypes.USER_REGISTER:
             return {
-                ...state, count: state.count + 1,
-            };
+                ...state, ...action.payload
+            }
+        case ActionTypes.USER_REGISTER_ERROR:
+            return {
+                ...state, ...action.payload
+            }
+        case ActionTypes.USER_REGISTER_STATUS:
+            return {
+                ...state, ...action.payload
+            }
         default:
             return state;
 
     }
 };
 
+export type ActionsType = RegisterUserActionType
+    | RegisterUserErrorActionType
+    | RegisterUserStatusActionType
+type RegisterUserActionType = ReturnType<typeof userRegister>
+type RegisterUserErrorActionType = ReturnType<typeof userRegisterError>
+type RegisterUserStatusActionType = ReturnType<typeof userRegisterStatus>
+
+export type InitialStateType = typeof initialState
+export type RequestStatusType = 'loading' | 'succeeded' | 'failed'

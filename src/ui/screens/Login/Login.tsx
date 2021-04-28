@@ -1,44 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {connect, useDispatch, useSelector} from "react-redux";
+import Input from "../../components/Input/Input";
+import {Redirect} from "react-router-dom";
+import {loginTC} from "../../redux/thunk/login/loginTh";
 
-import {useDispatch, useSelector} from "react-redux";
-import {Decrease, Increase} from "../../redux/actions/actions";
-import {requestUser} from "../../redux/thunk/registration/registration-thunk";
-
-export function Login(props:any) {
-
-    const users = useSelector((state:any) => state.register.users)
-    const count = useSelector((state:any) => state.register.count)
+export function Login(props: any) {
+    console.log(props)
+    const isAuth = useSelector((state:any) => state.authorization.isAuth)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [rememberMe, setRememberMe] = useState(false)
     const dispatch = useDispatch()
-
-
+    console.log(isAuth)
+    if(props.isAuth === true){
+        return <Redirect to="/home"/>
+    }
+    const resData = {email,password,rememberMe}
+    if(isAuth === true){
+        return <Redirect to="/home"/>
+    }
 
     return (
         <div>
             <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-                <div>Count: {count}</div>
-                <div>{Object.keys(users)}</div>
-                <div>{users.users?.map((user:any) => user.name)}</div>
-                <button
-                    onClick={() => dispatch(Increase())}
-                    type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black  hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Increase Count
-                </button>
-                <button
-                    onClick={() => dispatch(Decrease())}
-                    type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black  hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Decrease Count
-                </button>
-                <button
-                    onClick={() => dispatch(requestUser())}
-                    type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Request
-                </button>
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <img
                         className="mx-auto h-12 w-auto"
@@ -51,13 +35,15 @@ export function Login(props:any) {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST">
+                        <div className="space-y-6">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email address
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <Input
+                                        value={email}
+                                        setValue={setEmail}
                                         id="email"
                                         name="email"
                                         type="email"
@@ -73,7 +59,9 @@ export function Login(props:any) {
                                     Password
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <Input
+                                        value={password}
+                                        setValue={setPassword}
                                         id="password"
                                         name="password"
                                         type="password"
@@ -86,7 +74,9 @@ export function Login(props:any) {
 
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <input
+                                    <Input
+                                        value={rememberMe}
+                                        setValue={setRememberMe}
                                         id="remember_me"
                                         name="remember_me"
                                         type="checkbox"
@@ -95,12 +85,6 @@ export function Login(props:any) {
                                     <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
                                         Remember me
                                     </label>
-                                </div>
-
-                                <div className="text-sm">
-                                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Forgot your password?
-                                    </a>
                                 </div>
                             </div>
                             <div>
@@ -113,18 +97,19 @@ export function Login(props:any) {
                             </div>
                             <div>
                                 <button
+                                    onClick={() => dispatch(loginTC(resData))}
                                     type="submit"
                                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
                                     Sign in
                                 </button>
                             </div>
-                        </form>
+                        </div>
 
                         <div className="mt-6">
                             <div className="relative">
                                 <div className="absolute inset-0 flex items-center">
-                                    <div className="w-full border-t border-gray-300" />
+                                    <div className="w-full border-t border-gray-300"/>
                                 </div>
                                 <div className="relative flex justify-center text-sm">
                                     <span className="px-2 bg-white text-gray-500">Or continue with</span>
@@ -155,7 +140,8 @@ export function Login(props:any) {
                                     >
                                         <span className="sr-only">Sign in with Twitter</span>
                                         <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+                                            <path
+                                                d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"/>
                                         </svg>
                                     </a>
                                 </div>
@@ -184,7 +170,10 @@ export function Login(props:any) {
     )
 }
 
+const mapStateToProps = (state: any) => ({
+    isAuth: state.authorization.isAuth,
+});
 
 
 
-export default  Login
+export default connect(mapStateToProps, {loginTC})(Login)
