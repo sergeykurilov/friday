@@ -19,6 +19,9 @@ export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatc
         })
 }
 
+
+
+
 export type RegistrationRequestType = {
     email: string
     password: string
@@ -53,10 +56,3 @@ export type RegistrationUserErrorType = {
     }
 }
 
-// export const requestUser = () => {
-//     return async (dispatch:any) => {
-//         let data = await usersAPI.getUsers();
-//         console.log(data)
-//         dispatch(requestUsersAction(data));
-//     };
-// };

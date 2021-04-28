@@ -4,21 +4,28 @@ import React, {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {BellIcon, MenuIcon, XIcon} from '@heroicons/react/outline'
 import {NavLink} from 'react-router-dom'
+import {useDispatch, useSelector} from "react-redux";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
 export const PATH = {
-    DEFAULT: '/',
     LOGIN: "/login",
     RESET: "/forgotpassword",
-    REGISTER: "/register"
+    REGISTER: "/register",
+    HOME: "/home"
 }
 
 
 
 export function Navigation() {
+
+
+
+    const isAuth = useSelector((state:any) => state.authorization.isAuth)
+    const dispatch = useDispatch()
+
     return (
             <Disclosure as="nav" className="bg-white shadow">
                 {({open}) => (
@@ -42,8 +49,8 @@ export function Navigation() {
                                         {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                                         <NavLink
                                             className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                                            to={PATH.DEFAULT}>
-                                            Login
+                                            to={PATH.HOME}>
+                                            Home
                                         </NavLink>
                                         <NavLink
                                             className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"

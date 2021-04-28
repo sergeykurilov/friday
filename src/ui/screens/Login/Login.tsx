@@ -1,7 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {connect, useDispatch, useSelector} from "react-redux";
+import Input from "../../components/Input/Input";
+import {Redirect} from "react-router-dom";
+import {loginTC} from "../../redux/thunk/login/loginTh";
 
 export function Login(props: any) {
-
+    console.log(props)
+    const isAuth = useSelector((state:any) => state.authorization.isAuth)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [rememberMe, setRememberMe] = useState(false)
+    const dispatch = useDispatch()
+    console.log(isAuth)
+    if(props.isAuth === true){
+        return <Redirect to="/home"/>
+    }
+    const resData = {email,password,rememberMe}
+    if(isAuth === true){
+        return <Redirect to="/home"/>
+    }
 
     return (
         <div>
@@ -18,13 +35,15 @@ export function Login(props: any) {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST">
+                        <div className="space-y-6">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email address
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <Input
+                                        value={email}
+                                        setValue={setEmail}
                                         id="email"
                                         name="email"
                                         type="email"
@@ -40,7 +59,9 @@ export function Login(props: any) {
                                     Password
                                 </label>
                                 <div className="mt-1">
-                                    <input
+                                    <Input
+                                        value={password}
+                                        setValue={setPassword}
                                         id="password"
                                         name="password"
                                         type="password"
@@ -53,7 +74,9 @@ export function Login(props: any) {
 
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <input
+                                    <Input
+                                        value={rememberMe}
+                                        setValue={setRememberMe}
                                         id="remember_me"
                                         name="remember_me"
                                         type="checkbox"
@@ -62,12 +85,6 @@ export function Login(props: any) {
                                     <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
                                         Remember me
                                     </label>
-                                </div>
-
-                                <div className="text-sm">
-                                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Forgot your password?
-                                    </a>
                                 </div>
                             </div>
                             <div>
@@ -80,13 +97,14 @@ export function Login(props: any) {
                             </div>
                             <div>
                                 <button
+                                    onClick={() => dispatch(loginTC(resData))}
                                     type="submit"
                                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
                                     Sign in
                                 </button>
                             </div>
-                        </form>
+                        </div>
 
                         <div className="mt-6">
                             <div className="relative">
@@ -152,5 +170,10 @@ export function Login(props: any) {
     )
 }
 
+const mapStateToProps = (state: any) => ({
+    isAuth: state.authorization.isAuth,
+});
 
-export default Login
+
+
+export default connect(mapStateToProps, {loginTC})(Login)
