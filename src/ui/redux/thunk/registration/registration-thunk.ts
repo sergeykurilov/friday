@@ -7,6 +7,7 @@ export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatc
     dispatch(userRegisterStatus("loading"))
     registerAPI.registerUsers({...regData})
         .then((res) => {
+            console.log(res)
             dispatch(userRegister(true))
             dispatch(userRegisterStatus("succeeded"))
         })

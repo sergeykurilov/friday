@@ -14,6 +14,7 @@ export default function Registration() {
     const isRegistration = useSelector<RootStateType, boolean>(registration => registration.registration.isRegistration)
     const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
+    const resData = {email,password}
 
     const onChangeEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
@@ -47,7 +48,7 @@ export default function Registration() {
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <form className="space-y-6" action="#" method="POST">
+                    <div className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email address
@@ -109,14 +110,14 @@ export default function Registration() {
                             <button
                                 type="submit"
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                disabled={status === "loading"}
-                                onClick={onRegistrationCallback}
+                                // disabled={status === "loading"}
+                                onClick={() => dispatch(userRegistrationTC(resData))}
                             >
                                 Sign up
                             </button>
 
                         </div>
-                    </form>
+                    </div>
 
                     <div className="mt-6">
                         <div className="relative">

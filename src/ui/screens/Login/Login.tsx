@@ -16,9 +16,10 @@ export function Login(props: any) {
         return <Redirect to="/home"/>
     }
     const resData = {email,password,rememberMe}
-    if(isAuth === true){
-        return <Redirect to="/home"/>
-    }
+    // if(isAuth === true){
+    //     return <Redirect to="/home"/>
+    // }
+
 
     return (
         <div>
