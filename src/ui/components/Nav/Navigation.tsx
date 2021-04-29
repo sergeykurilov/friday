@@ -22,9 +22,8 @@ export const PATH = {
 export function Navigation() {
 
 
-
-    const isAuth = useSelector((state:any) => state.authorization.isAuth)
-    const dispatch = useDispatch()
+    // const isAuth = useSelector((state:any) => state.authorization.isAuth)
+    // const dispatch = useDispatch()
 
     return (
             <Disclosure as="nav" className="bg-white shadow">
