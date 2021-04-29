@@ -10,7 +10,7 @@ export const instance = axios.create({
 
 export const registerAPI = {
     registerUsers(regData: RegistrationRequestType) {
-        return instance.post<RegistrationResponseType>(`auth/register`, {...regData})
+        return instance.post<RegistrationResponseType>(`auth/register`, {...regData}).then((res:any) => res.data)
     }
 };
 

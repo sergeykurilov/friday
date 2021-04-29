@@ -23,6 +23,7 @@ export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatc
 export type RegistrationRequestType = {
     email: string
     password: string
+    rememberMe: boolean
 }
 
 export type RegistrationResponseType = {

@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store/store";
 import {RequestStatusType} from "../../redux/reducers/registration/registration-reducer";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {PATH} from '../../components/Nav/Navigation';
 import {userRegistrationTC} from "../../redux/thunk/registration/registration-thunk";
 
@@ -11,6 +11,8 @@ export default function Registration() {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [rememberMe, setRememberMe] = useState<boolean>(false)
+
     const isRegistration = useSelector<RootStateType, boolean>(registration => registration.registration.isRegistration)
     const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
@@ -23,8 +25,12 @@ export default function Registration() {
         setPassword(e.currentTarget.value)
     }
 
+    const onChangeRememberMeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setRememberMe(e.currentTarget.checked)
+    }
+
     const onRegistrationCallback = () => {
-        dispatch(userRegistrationTC({email, password}))
+        dispatch(userRegistrationTC({email, password, rememberMe}))
     }
 
     // isAuth && <Redirect to={PATH.LOGIN}/>
@@ -89,6 +95,8 @@ export default function Registration() {
                                     id="remember_me"
                                     name="remember_me"
                                     type="checkbox"
+                                    checked={rememberMe}
+                                    onChange={onChangeRememberMeHandler}
                                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                                 />
                                 <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
@@ -97,18 +105,18 @@ export default function Registration() {
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                <NavLink to={PATH.RESET} className="font-medium text-indigo-600 hover:text-indigo-500">
                                     Forgot your password?
-                                </a>
+                                </NavLink>
                             </div>
 
                         </div>
 
                         <div>
-                            <button
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                              //  disabled={status === "loading"}
-                                onClick={onRegistrationCallback}
+                            <button type="submit"
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                //  disabled={status === "loading"}
+                                    onClick={onRegistrationCallback}
                             >
                                 Sign up
                             </button>
@@ -129,7 +137,7 @@ export default function Registration() {
                         <div className="mt-6 grid grid-cols-3 gap-3">
                             <div>
                                 <a
-                                    href="#"
+                                    href="https://www.facebook.com"
                                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                                 >
                                     <span className="sr-only">Sign in with Facebook</span>
@@ -145,7 +153,7 @@ export default function Registration() {
 
                             <div>
                                 <a
-                                    href="#"
+                                    href="https://twitter.com/"
                                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                                 >
                                     <span className="sr-only">Sign in with Twitter</span>
@@ -158,7 +166,7 @@ export default function Registration() {
 
                             <div>
                                 <a
-                                    href="#"
+                                    href="https://github.com/"
                                     className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                                 >
                                     <span className="sr-only">Sign in with GitHub</span>
