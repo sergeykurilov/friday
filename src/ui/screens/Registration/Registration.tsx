@@ -24,8 +24,7 @@ export default function Registration() {
     }
 
     const onRegistrationCallback = () => {
-       dispatch(userRegistrationTC({email, password}))
-       //  console.log("vse rabotaet")
+        dispatch(userRegistrationTC({email, password}))
     }
 
     // isAuth && <Redirect to={PATH.LOGIN}/>
@@ -107,9 +106,8 @@ export default function Registration() {
 
                         <div>
                             <button
-                                type="submit"
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                disabled={status === "loading"}
+                              //  disabled={status === "loading"}
                                 onClick={onRegistrationCallback}
                             >
                                 Sign up

@@ -5,7 +5,7 @@ import {userRegister, userRegisterError, userRegisterStatus} from "../../actions
 
 export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(userRegisterStatus("loading"))
-    registerAPI.registerUsers({...regData})
+    return registerAPI.registerUsers({...regData})
         .then((res) => {
             dispatch(userRegister(true))
             dispatch(userRegisterStatus("succeeded"))
@@ -18,8 +18,6 @@ export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatc
             }
         })
 }
-
-
 
 
 export type RegistrationRequestType = {
