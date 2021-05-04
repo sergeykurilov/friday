@@ -5,16 +5,14 @@ import {RequestStatusType} from "../../redux/reducers/registration/registration-
 import {Redirect} from "react-router-dom";
 import {PATH} from '../../components/Nav/Navigation';
 import {userRegistrationTC} from "../../redux/thunk/registration/registration-thunk";
-import { WithSocial } from '../../../common/WithSocial';
+import {WithSocial} from '../../../common/WithSocial';
 
 
 export default function Registration() {
-        ////asdasd
+
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState(false)
-
-
     const [passwordError, setPasswordError] = React.useState<string | null>(null);
     const [emailError, setEmailError] = React.useState<string | null>(null);
 
@@ -23,9 +21,6 @@ export default function Registration() {
 
     const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
-    const resData = {email,password, rememberMe}
-
-
 
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,25 +69,10 @@ export default function Registration() {
     }
 
 
-
-    ///////
-
-
-    ///////
-
-
-
-
-
-    // const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setPassword(e.currentTarget.value)
-    // }
-
     const onRegistrationCallback = () => {
-       dispatch(userRegistrationTC({email, password, rememberMe}))
+        dispatch(userRegistrationTC({email, password, rememberMe}))
     }
 
-    // isAuth && <Redirect to={PATH.LOGIN}/>
 
     if (isRegistration) {
         return <Redirect to={PATH.LOGIN}/>
@@ -148,8 +128,9 @@ export default function Registration() {
                                 />
                             </div>
                         </div>
-                        {passwordError &&	  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                                                    role="alert">
+                        {passwordError &&
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                             role="alert">
                             <strong className="font-bold">{passwordError}</strong>
                         </div>}
                         <div className="flex items-center justify-between">
@@ -180,17 +161,14 @@ export default function Registration() {
                                 type="submit"
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 // disabled={status === "loading"}
-                                onClick={() => dispatch(userRegistrationTC(resData))}
+                                onClick={onRegistrationCallback}
                             >
                                 Sign up
                             </button>
 
                         </div>
                     </div>
-
-
-                       <WithSocial/>
-
+                    <WithSocial/>
                 </div>
             </div>
         </div>
