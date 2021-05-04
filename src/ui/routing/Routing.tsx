@@ -10,11 +10,13 @@ import {HomePage} from "../screens/HomePage/HomePage";
 import {useDispatch, useSelector} from "react-redux";
 
 import PrivateRoute from "./Private";
-
+// import {auth} from "../../server/api";
 
 export default function Routing() {
     const isAuth = useSelector((state: any) => state.authorization.isAuth)
+    const user = useSelector((state:any) => state.authorization.user)
     const dispatch = useDispatch()
+    //
 
 
     return (
@@ -23,6 +25,7 @@ export default function Routing() {
 
                 <BrowserRouter>
                     <Switch>
+                        {/*<PrivateRoute component={HomePage} path={PATH.HOME}/>*/}
                         <Route exact component={Login} path={PATH.LOGIN}/>
                         <Route exact component={HomePage} path={PATH.HOME}/>
                         <Route exact component={Registration} path={PATH.REGISTER}/>

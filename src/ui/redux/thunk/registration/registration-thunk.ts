@@ -5,8 +5,9 @@ import {userRegister, userRegisterError, userRegisterStatus} from "../../actions
 
 export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(userRegisterStatus("loading"))
-    registerAPI.registerUsers({...regData})
+    return registerAPI.registerUsers({...regData})
         .then((res) => {
+            console.log(res)
             dispatch(userRegister(true))
             dispatch(userRegisterStatus("succeeded"))
         })
@@ -20,11 +21,10 @@ export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatc
 }
 
 
-
-
 export type RegistrationRequestType = {
     email: string
     password: string
+    rememberMe: boolean
 }
 
 export type RegistrationResponseType = {

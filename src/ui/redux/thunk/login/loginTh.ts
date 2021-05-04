@@ -1,4 +1,4 @@
-import {authAPI, instance, loginAPI} from "../../../../server/api";
+import {instance, loginAPI} from "../../../../server/api";
 import {isAuth, logout, setUser, userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
 import {Dispatch} from "redux";
 /*
@@ -31,9 +31,30 @@ export const loginTC = ({...loginData}: LoginRequestType) => {
     }
 }
 
-export const authTC = ({...authData}) => {
+export const setAuthUserData = () => async (dispatch:any) => {
+    let data = await loginAPI.me();
+    if (localStorage.getItem("token")) {
+        dispatch(setUser(data));
+    }
+};
 
-}
+// export const authTC = () => {
+//     return async (dispatch: Dispatch<LoginActionsType>) => {
+//         dispatch(isAuth(false))
+//         loginAPI.me().then((res:any) => {
+//             try {
+//                 console.log(res)
+//                 dispatch(setUser(res))
+//                 localStorage.setItem('token', res.token)
+//             }catch (e:any) {
+//                 console.error(e.res.data.error)
+//                 localStorage.removeItem('token')
+//             }
+//         })
+//     }
+// }
+
+
 
 export type LoginActionsType = LoginActionType
     | LogOutActionType
