@@ -24,7 +24,7 @@ export default function Registration() {
     }
 
     const onRegistrationCallback = () => {
-       dispatch(userRegistrationTC({email, password}))
+       dispatch(userRegistrationTC({email, password,rememberMe}))
     }
 
     // isAuth && <Redirect to={PATH.LOGIN}/>
