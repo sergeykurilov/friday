@@ -5,6 +5,7 @@ import {setUser} from "../ui/redux/actions/actions";
 
 
 export const instance = axios.create({
+    withCredentials: true,
     baseURL: "https://neko-back.herokuapp.com/2.0/",
 });
 
@@ -18,22 +19,26 @@ export const registerAPI = {
 export const loginAPI = {
     loginUser(loginData: LoginRequestType) {
         return instance.post<LoginResponseType>(`auth/login`, {...loginData}).then((res:any) => res.data)
+    },
+    me() {
+        return instance
+            .post<any>(`auth/me`, {})
+            .then((response) => {
+                console.log(response)
+                return response.data;
+            });
     }
 }
-
-
-export const authAPI = () => {
-    return async (dispatch: any) => {
-        try {
-            const response = await instance.post(`auth/me`,
-                {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
-            )
-            dispatch(setUser(response.data.data))
-            localStorage.setItem('token', response.data.data.token)
-
-        } catch (e) {
-            console.error(e)
-            localStorage.removeItem('token')
-        }
-    }
-}
+// export const auth =  () => {
+//     return async (dispatch:any) => {
+//         try {
+//             const response: any = await instance.post(`/auth/me`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
+//             dispatch(response)
+//             console.log(response)
+//             localStorage.setItem('token', response.data.in)
+//         }
+//         catch (error) {
+//             console.log(error)
+//         }
+//     }
+// }
