@@ -8,7 +8,7 @@ import {userRegistrationTC} from "../../redux/thunk/registration/registration-th
 
 
 export default function Registration() {
-
+        ////asdasd
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState(false)
