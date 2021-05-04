@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, { useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store/store";
 import {RequestStatusType} from "../../redux/reducers/registration/registration-reducer";
@@ -10,7 +10,7 @@ import {handleEmailChange, handlePasswordChange, ValidateInput} from "../../comp
 
 
 export default function Registration() {
-    ////asdasd
+
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState(false)
@@ -25,12 +25,6 @@ export default function Registration() {
     const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
     const resData = {email, password, rememberMe}
-
-
-    ///////
-
-
-    ///////
 
 
     // const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
