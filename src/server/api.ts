@@ -5,12 +5,12 @@ import {setUser} from "../ui/redux/actions/actions";
 
 
 export const instance = axios.create({
-    baseURL: `https://neko-back.herokuapp.com/2.0/`
+    baseURL: "https://neko-back.herokuapp.com/2.0/",
 });
 
 export const registerAPI = {
     registerUsers(regData: RegistrationRequestType) {
-        return instance.post<RegistrationResponseType>(`auth/register`, {...regData}).then((res:any) => res.data)
+        return instance.post<RegistrationResponseType>(`auth/register`, {...regData})
     }
 };
 

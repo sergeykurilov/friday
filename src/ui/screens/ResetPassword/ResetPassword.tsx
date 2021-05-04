@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {WithSocial} from "../../components/Common/WithSocial";
+import {WithSocial} from "../../../common/WithSocial";
 
 export function ResetPassword({ history, match }:any) {
     const [password, setPassword] = useState("");

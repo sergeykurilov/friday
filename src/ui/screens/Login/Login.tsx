@@ -3,7 +3,7 @@ import {connect, useDispatch, useSelector} from "react-redux";
 import Input from "../../components/Input/Input";
 import {Redirect} from "react-router-dom";
 import {loginTC} from "../../redux/thunk/login/loginTh";
-import { WithSocial } from '../../components/Common/WithSocial';
+import { WithSocial } from '../../../common/WithSocial';
 
 export function Login(props: any) {
 
@@ -17,9 +17,10 @@ export function Login(props: any) {
         return <Redirect to="/home"/>
     }
     const resData = {email,password,rememberMe}
-    if(isAuth === true){
-        return <Redirect to="/home"/>
-    }
+    // if(isAuth === true){
+    //     return <Redirect to="/home"/>
+    // }
+
 
     const onClickHandler = () => dispatch(loginTC(resData));
 
