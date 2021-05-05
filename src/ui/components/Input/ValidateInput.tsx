@@ -1,9 +1,9 @@
-import React, {ChangeEvent, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {RootStateType} from "../../redux/store/store";
-import {RequestStatusType} from "../../redux/reducers/registration/registration-reducer";
+import React, {ChangeEvent, ChangeEventHandler} from 'react';
 
-export const handlePasswordChange = (setPassword: any, setPasswordError: any) =>  (e: any) => {
+export const handlePasswordChange = (
+        setPassword: (password: string) => void,
+        setPasswordError: (password: string | null) => void
+    ) => (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value)
     let passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     if (e.currentTarget.value.match(passwordRegex)) {
@@ -14,14 +14,11 @@ export const handlePasswordChange = (setPassword: any, setPasswordError: any) =>
 }
 
 
-export const handleEmailChange = (setEmail: any, setEmailError: any) => (e: ChangeEvent<HTMLInputElement>) => {
+export const handleEmailChange = (
+        setEmail: React.Dispatch<React.SetStateAction<string>>,
+        setEmailError: React.Dispatch<React.SetStateAction<string | null>>
+    ) => (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
-    //
-    // let sAddrSpec = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    //
-    //
-    // let sValidEmail = '^' + sAddrSpec + '$';
-    // let emailRegex = new RegExp(sValidEmail);
     const sQtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]';
     const sText = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]';
     const sAtom = '[^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+';
@@ -36,7 +33,6 @@ export const handleEmailChange = (setEmail: any, setEmailError: any) => (e: Chan
     const sValidEmail = '^' + sAddrSpec + '$'; // as whole string
     const emailRegex = new RegExp(sValidEmail);
 
-
     if (e.currentTarget.value.match(emailRegex)) {
         setEmailError(null);
     } else {
@@ -44,8 +40,18 @@ export const handleEmailChange = (setEmail: any, setEmailError: any) => (e: Chan
     }
 }
 
+type ValidateInputPropsType = {
+    funcName: string
+    value: string
+    onChange: ChangeEventHandler<HTMLInputElement>
+    required: boolean
+    type: string
+    name: string
+    id: string
+    error: string | null
+}
 
-export const ValidateInput = ({funcName, value, onChange, required, type, name, id, error}: any) => {
+export const ValidateInput = ({funcName, value, onChange, required, type, name, id, error}: ValidateInputPropsType) => {
 
     return (
         <div>
@@ -54,13 +60,12 @@ export const ValidateInput = ({funcName, value, onChange, required, type, name, 
             </label>
             <div className="mt-1">
                 <input
-                    id="email"
+                    id={id}
                     value={value}
                     onChange={onChange}
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
+                    name={name}
+                    type={type}
+                    required={required}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
             </div>

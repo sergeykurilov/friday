@@ -1,4 +1,4 @@
-import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/regisration-actions";
 import {ActionTypes} from "../../constants/constants";
 
 
