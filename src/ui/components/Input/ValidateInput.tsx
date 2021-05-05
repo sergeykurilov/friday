@@ -14,7 +14,10 @@ export const handlePasswordChange = (
 }
 
 
-export const handleEmailChange = (setEmail: React.Dispatch<React.SetStateAction<string>>, setEmailError: React.Dispatch<React.SetStateAction<string | null>>) => (e: ChangeEvent<HTMLInputElement>) => {
+export const handleEmailChange = (
+        setEmail: React.Dispatch<React.SetStateAction<string>>,
+        setEmailError: React.Dispatch<React.SetStateAction<string | null>>
+    ) => (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
     const sQtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]';
     const sText = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]';

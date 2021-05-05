@@ -8,12 +8,12 @@ import {WithSocial} from "../../../common/WithSocial";
 import {useTypedSelector} from "../../redux/store/store";
 
 export const Login:React.FC = (props) => {
-    const isAuth = useSelector<RootStateType,boolean>(state => state.login.isAuth)
+    const isAuth = useTypedSelector<boolean>(state => state.login.isAuth)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
-    const [emailError, setEmailError] = React.useState<string | null>(null);
-    const [passwordError, setPasswordError] = React.useState<string | null>(null);
+    const [emailError, setEmailError] = useState<string | null>(null);
+    const [passwordError, setPasswordError] = useState<string | null>(null);
     const resData = {email,password,rememberMe}
     const dispatch = useDispatch()
 
