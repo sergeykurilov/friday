@@ -1,7 +1,6 @@
 import axios from "axios";
 import {RegistrationRequestType, RegistrationResponseType} from "../ui/redux/thunk/registration/registration-thunk";
 import {LoginRequestType, LoginResponseType} from "../ui/redux/thunk/login/login-thunk";
-import {setUser} from "../ui/redux/actions/regisration-actions";
 
 
 export const instance = axios.create({

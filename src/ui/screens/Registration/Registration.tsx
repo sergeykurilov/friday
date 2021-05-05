@@ -22,18 +22,12 @@ export default function Registration() {
 
     const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
-    const resData = {email, password, rememberMe}
 
-
-    // const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setPassword(e.currentTarget.value)
-    // }
 
     const onRegistrationCallback = () => {
         dispatch(userRegistrationTC({email, password, rememberMe}))
     }
 
-    // isAuth && <Redirect to={PATH.LOGIN}/>
 
     if (isRegistration) {
         return <Redirect to={PATH.LOGIN}/>
