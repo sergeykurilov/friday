@@ -24,8 +24,8 @@ export const loginTC = ({...loginData}: LoginRequestType) => {
         dispatch(isAuth(false))
         loginAPI.loginUser({...loginData}).then((res:any) => {
             console.log(res)
-            dispatch(setUser(res))
             dispatch(isAuth(true))
+            dispatch(setUser(res))
             localStorage.setItem('token', res.token)
         })
     }

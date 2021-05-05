@@ -4,7 +4,6 @@ import {login} from "../../actions/login-actions";
 
 const initialState = {
     isAuth: false,
-
 };
 
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
