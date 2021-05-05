@@ -1,5 +1,5 @@
 import {instance, loginAPI} from "../../../../server/api";
-import {isAuth, logout, setUser, userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {isAuth, logout, setUser, userRegister, userRegisterError, userRegisterStatus} from "../../actions/regisration-actions";
 import {Dispatch} from "redux";
 /*
 avatar: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAA
