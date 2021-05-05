@@ -9,7 +9,7 @@ import {Redirect} from "react-router-dom";
 export const HomePage = (props: any) => {
 
 
-    const user = useSelector((state: any) => state.authorization.user)
+    const user = useSelector((state: any) => state.login.user)
     const dispatch = useDispatch()
 
 
@@ -21,11 +21,10 @@ export const HomePage = (props: any) => {
     }, [])
 
     return (
-        <div>
-            <img src={user.avatar} alt=""/>
+        <div style={{maxWidth: "80%", margin: "auto"}}>
+            <img src={user?.avatar} alt=""/>
             <p>{user?.email}</p>
             <p>{user?.name}</p>
-
         </div>
     )
 }
