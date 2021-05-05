@@ -14,8 +14,6 @@ export default function Registration() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState(false)
-
-
     const [passwordError, setPasswordError] = React.useState<string | null>(null);
     const [emailError, setEmailError] = React.useState<string | null>(null);
 
@@ -82,7 +80,7 @@ export default function Registration() {
                             type="submit"
                             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             // disabled={status === "loading"}
-                            onClick={() => dispatch(userRegistrationTC(resData))}
+                            onClick={onRegistrationCallback}
                         >
                             Sign up
                         </button>
