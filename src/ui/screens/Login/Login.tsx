@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import Input from "../../components/Input/Input";
 import {Redirect} from "react-router-dom";
 import {loginTC} from "../../redux/thunk/login/login-thunk";
 import {handleEmailChange, handlePasswordChange, ValidateInput} from "../../components/Input/ValidateInput";
 import {WithSocial} from "../../../common/WithSocial";
-import {RootStateType} from "../../redux/store/store";
+import {useTypedSelector} from "../../redux/store/store";
 
 export const Login:React.FC = (props) => {
     const isAuth = useSelector<RootStateType,boolean>(state => state.login.isAuth)
