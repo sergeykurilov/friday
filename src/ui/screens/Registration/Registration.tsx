@@ -48,12 +48,23 @@ export default function Registration() {
             </div>
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <ValidateInput funcName={"Email address"} value={email}
-                                   onChange={handleEmailChange(setEmail, setEmailError)} required={true}
-                                   type={"email"} name={"email"} id={"email"} error={emailError}/>
-                    <ValidateInput funcName={"Password"} value={password}
-                                   onChange={handlePasswordChange(setPassword, setPasswordError)} required={true}
-                                   type="password" name="password" id="password" error={passwordError}/>
+                    <ValidateInput funcName={"Email address"}
+                                   value={email}
+                                   onChange={handleEmailChange(setEmail, setEmailError)}
+                                   required={true}
+                                   type={"email"}
+                                   name={"email"}
+                                   id={"email"}
+                                   error={emailError}
+                    />
+                    <ValidateInput funcName={"Password"}
+                                   value={password}
+                                   onChange={handlePasswordChange(setPassword, setPasswordError)}
+                                   required={true}
+                                   type="password"
+                                   name="password"
+                                   id="password"
+                                   error={passwordError}/>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input

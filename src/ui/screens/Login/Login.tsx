@@ -3,6 +3,7 @@ import {connect, useDispatch, useSelector} from "react-redux";
 import Input from "../../components/Input/Input";
 import {Redirect} from "react-router-dom";
 import {loginTC} from "../../redux/thunk/login/loginTh";
+import {handleEmailChange, handlePasswordChange, ValidateInput} from "../../components/Input/ValidateInput";
 
 export function Login(props: any) {
     console.log(props)
@@ -10,6 +11,10 @@ export function Login(props: any) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
+    const [emailError, setEmailError] = React.useState<string | null>(null);
+    const [passwordError, setPasswordError] = React.useState<string | null>(null);
+
+
     const dispatch = useDispatch()
     console.log(isAuth)
     if(props.isAuth === true){
@@ -37,38 +42,55 @@ export function Login(props: any) {
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <div className="space-y-6">
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Email address
-                                </label>
+                                {/*<label htmlFor="email" className="block text-sm font-medium text-gray-700">*/}
+                                {/*    Email address*/}
+                                {/*</label>*/}
                                 <div className="mt-1">
-                                    <Input
-                                        value={email}
-                                        setValue={setEmail}
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        autoComplete="email"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    <ValidateInput funcName={"Email address"}
+                                                   value={email}
+                                                   onChange={handleEmailChange(setEmail, setEmailError)}
+                                                   required={true}
+                                                   type={"email"}
+                                                   name={"email"}
+                                                   id={"email"}
+                                                   error={emailError}
                                     />
+                                    {/*<Input*/}
+                                    {/*    value={email}*/}
+                                    {/*    setValue={setEmail}*/}
+                                    {/*    id="email"*/}
+                                    {/*    name="email"*/}
+                                    {/*    type="email"*/}
+                                    {/*    autoComplete="email"*/}
+                                    {/*    required*/}
+                                    {/*    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"*/}
+                                    {/*/>*/}
                                 </div>
                             </div>
 
                             <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                    Password
-                                </label>
+                                {/*<label htmlFor="password" className="block text-sm font-medium text-gray-700">*/}
+                                {/*    Password*/}
+                                {/*</label>*/}
                                 <div className="mt-1">
-                                    <Input
-                                        value={password}
-                                        setValue={setPassword}
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        autoComplete="current-password"
-                                        required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    />
+                                    <ValidateInput funcName={"Password"}
+                                                   value={password}
+                                                   onChange={handlePasswordChange(setPassword, setPasswordError)}
+                                                   required={true}
+                                                   type="password"
+                                                   name="password"
+                                                   id="password"
+                                                   error={passwordError}/>
+                                    {/*<Input*/}
+                                    {/*    value={password}*/}
+                                    {/*    setValue={setPassword}*/}
+                                    {/*    id="password"*/}
+                                    {/*    name="password"*/}
+                                    {/*    type="password"*/}
+                                    {/*    autoComplete="current-password"*/}
+                                    {/*    required*/}
+                                    {/*    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"*/}
+                                    {/*/>*/}
                                 </div>
                             </div>
 
