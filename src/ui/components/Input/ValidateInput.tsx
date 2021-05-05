@@ -1,6 +1,9 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, ChangeEventHandler} from 'react';
 
-export const handlePasswordChange = (setPassword: any, setPasswordError: any) => (e: any) => {
+export const handlePasswordChange = (
+        setPassword: (password: string) => void,
+        setPasswordError: (password: string | null) => void
+    ) => (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value)
     let passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     if (e.currentTarget.value.match(passwordRegex)) {
@@ -13,12 +16,6 @@ export const handlePasswordChange = (setPassword: any, setPasswordError: any) =>
 
 export const handleEmailChange = (setEmail: React.Dispatch<React.SetStateAction<string>>, setEmailError: React.Dispatch<React.SetStateAction<string | null>>) => (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
-    //
-    // let sAddrSpec = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    //
-    //
-    // let sValidEmail = '^' + sAddrSpec + '$';
-    // let emailRegex = new RegExp(sValidEmail);
     const sQtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]';
     const sText = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]';
     const sAtom = '[^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+';
@@ -33,7 +30,6 @@ export const handleEmailChange = (setEmail: React.Dispatch<React.SetStateAction<
     const sValidEmail = '^' + sAddrSpec + '$'; // as whole string
     const emailRegex = new RegExp(sValidEmail);
 
-
     if (e.currentTarget.value.match(emailRegex)) {
         setEmailError(null);
     } else {
@@ -44,7 +40,7 @@ export const handleEmailChange = (setEmail: React.Dispatch<React.SetStateAction<
 type ValidateInputPropsType = {
     funcName: string
     value: string
-    onChange:any
+    onChange: ChangeEventHandler<HTMLInputElement>
     required: boolean
     type: string
     name: string

@@ -14,29 +14,14 @@ export default function Registration() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState(false)
-
-
     const [passwordError, setPasswordError] = React.useState<string | null>(null);
     const [emailError, setEmailError] = React.useState<string | null>(null);
-
     const isRegistration = useSelector<RootStateType, boolean>(registration => registration.registration.isRegistration)
-
-
     const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
-    const resData = {email, password, rememberMe}
-
-
-    // const onChangePasswordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setPassword(e.currentTarget.value)
-    // }
-
     const onRegistrationCallback = () => {
         dispatch(userRegistrationTC({email, password, rememberMe}))
     }
-
-    // isAuth && <Redirect to={PATH.LOGIN}/>
-
     if (isRegistration) {
         return <Redirect to={PATH.LOGIN}/>
     }
@@ -72,7 +57,7 @@ export default function Registration() {
                                 name="remember_me"
                                 type="checkbox"
                                 checked={rememberMe}
-                                onClick={() => setRememberMe(true)}
+                                onClick={onRememberMeHandler}
                                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                             />
                             <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
@@ -97,13 +82,9 @@ export default function Registration() {
                         >
                             Sign up
                         </button>
-
                     </div>
                 </div>
-
-
                 <WithSocial/>
-
             </div>
         </div>
     )

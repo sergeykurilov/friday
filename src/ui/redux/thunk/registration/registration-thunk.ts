@@ -1,7 +1,7 @@
 import {registerAPI} from "../../../../server/api";
 import {Dispatch} from "redux";
 import {ActionsType} from "../../reducers/registration/registration-reducer";
-import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/regisration-actions";
 
 export const userRegistrationTC = (regData: RegistrationRequestType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(userRegisterStatus("loading"))
