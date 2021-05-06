@@ -157,7 +157,7 @@ export const ResetPassword = ({match}: any) => { //props.match from React router
             })
             .catch(error => {
                 console.log('FORGOT PASSWORD ERROR', error);
-                // alert(error.message);
+                // alert(error.error);/
                 setValues({...values, buttonText: 'Reset password'});
             });
     };

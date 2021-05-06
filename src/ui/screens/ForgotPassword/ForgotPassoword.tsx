@@ -175,7 +175,6 @@ export const ForgotPassword = ({history}: any) => {
     return (
         <div>
             <div className="col-d-6 offset-md-3">
-                <h1 className="p-5">Forgot Password</h1>
                 {passwordForgotForm()}
             </div>
         </div>
