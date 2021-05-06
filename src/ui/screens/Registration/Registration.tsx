@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {RootStateType, useTypedSelector} from "../../redux/store/store";
+import {RootStateType} from "../../redux/store/store";
 import {RequestStatusType} from "../../redux/reducers/registration/registration-reducer";
 import {Redirect} from "react-router-dom";
 import {PATH} from '../../components/Nav/Navigation';
@@ -14,20 +14,25 @@ export default function Registration() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [rememberMe, setRememberMe] = useState(false)
-    const [passwordError, setPasswordError] = useState<string | null>(null);
-    const [emailError, setEmailError] = useState<string | null>(null);
-    const isRegistration = useTypedSelector<boolean>(state => state.registration.isRegistration)
-    const status = useTypedSelector<RequestStatusType>(state => state.registration.status)
+    const [passwordError, setPasswordError] = React.useState<string | null>(null);
+    const [emailError, setEmailError] = React.useState<string | null>(null);
+
+    const isRegistration = useSelector<RootStateType, boolean>(registration => registration.registration.isRegistration)
+
+
+    const status = useSelector<RootStateType, RequestStatusType>(registration => registration.registration.status)
     const dispatch = useDispatch();
+
+
     const onRegistrationCallback = () => {
         dispatch(userRegistrationTC({email, password, rememberMe}))
     }
+
+
     if (isRegistration) {
         return <Redirect to={PATH.LOGIN}/>
     }
 
-    let onChange = handleEmailChange(setEmail, setEmailError);
-    let onRememberMeHandler = () => setRememberMe(true);
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -35,23 +40,12 @@ export default function Registration() {
             </div>
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <ValidateInput funcName={"Email address"}
-                                   value={email}
-                                   onChange={onChange}
-                                   required={true}
-                                   type={"email"}
-                                   name={"email"}
-                                   id={"email"}
-                                   error={emailError}
-                    />
-                    <ValidateInput funcName={"Password"}
-                                   value={password}
-                                   onChange={handlePasswordChange(setPassword, setPasswordError)}
-                                   required={true}
-                                   type="password"
-                                   name="password"
-                                   id="password"
-                                   error={passwordError}/>
+                    <ValidateInput funcName={"Email address"} value={email}
+                                   onChange={handleEmailChange(setEmail, setEmailError)} required={true}
+                                   type={"email"} name={"email"} id={"email"} error={emailError}/>
+                    <ValidateInput funcName={"Password"} value={password}
+                                   onChange={handlePasswordChange(setPassword, setPasswordError)} required={true}
+                                   type="password" name="password" id="password" error={passwordError}/>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input
@@ -59,7 +53,7 @@ export default function Registration() {
                                 name="remember_me"
                                 type="checkbox"
                                 checked={rememberMe}
-                                onClick={onRememberMeHandler}
+                                onClick={() => setRememberMe(true)}
                                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                             />
                             <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
@@ -84,9 +78,13 @@ export default function Registration() {
                         >
                             Sign up
                         </button>
+
                     </div>
                 </div>
+
+
                 <WithSocial/>
+
             </div>
         </div>
     )
