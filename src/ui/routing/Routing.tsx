@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
 import {Login} from '../screens/Login/Login';
 import Registration from '../screens/Registration/Registration';
 import {PATH} from "../components/Nav/Navigation";
@@ -13,12 +13,12 @@ export default function Routing() {
         <div className="app-wrapper">
             <div className="app-wrapper-content">
 
-                <BrowserRouter>
+                <HashRouter>
                     <Switch>
                         {/*<PrivateRoute component={HomePage} path={PATH.HOME}/>*/}
-                        <Route exact component={Login} path={PATH.LOGIN}/>
-                        <Route exact component={HomePage} path={PATH.HOME}/>
-                        <Route exact component={Registration} path={PATH.REGISTER}/>
+                        <Route exact render={() => Login} path={PATH.LOGIN}/>
+                        <Route exact render={() =>HomePage} path={PATH.HOME}/>
+                        <Route exact render={() =>Registration} path={PATH.REGISTER}/>
                         <Route
                             exact
                             path="/forgotpassword"
@@ -30,7 +30,7 @@ export default function Routing() {
                             component={ResetPassword}
                         />
                     </Switch>
-                </BrowserRouter>
+                </HashRouter>
             </div>
         </div>
     )
