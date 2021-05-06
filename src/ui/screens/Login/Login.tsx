@@ -17,7 +17,7 @@ export const Login:React.FC = (props) => {
     const resData = {email,password,rememberMe}
     const dispatch = useDispatch()
 
-    if(isAuth === true){
+    if(isAuth){
         return <Redirect to="/home"/>
     }
 

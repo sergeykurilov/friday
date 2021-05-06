@@ -16,9 +16,16 @@ export default function Routing() {
                 <HashRouter>
                     <Switch>
                         {/*<PrivateRoute component={HomePage} path={PATH.HOME}/>*/}
-                        <Route exact render={() => Login} path={PATH.LOGIN}/>
-                        <Route exact render={() =>HomePage} path={PATH.HOME}/>
-                        <Route exact render={() =>Registration} path={PATH.REGISTER}/>
+                        <Route exact
+                               component={Login}
+                               render={() => Login}
+                               path={PATH.LOGIN}/>
+                        <Route exact
+                               component={HomePage}
+                               path={PATH.HOME}/>
+                        <Route exact
+                               component={Registration}
+                               path={PATH.REGISTER}/>
                         <Route
                             exact
                             path="/forgotpassword"
@@ -26,7 +33,7 @@ export default function Routing() {
                         />
                         <Route
                             exact
-                            path="/passwordreset/:token"
+                            path="/set-new-password/:token"
                             component={ResetPassword}
                         />
                     </Switch>

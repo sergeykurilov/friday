@@ -12,7 +12,8 @@ function classNames(...classes: string[]) {
 
 export const PATH = {
     LOGIN: "/login",
-    RESET: "/forgotpassword",
+    FORGOT: "/forgotpassword",
+    RESET: "/set-new-password",
     REGISTER: "/register",
     HOME: "/home"
 }
