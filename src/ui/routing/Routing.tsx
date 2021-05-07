@@ -1,8 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
 import {Login} from '../screens/Login/Login';
 import Registration from '../screens/Registration/Registration';
-import {PATH} from "../components/Nav/Navigation";
+import {Navigation, PATH} from "../components/Nav/Navigation";
 import {ResetPassword} from "../screens/ResetPassword/ResetPassword";
 import {ForgotPassword} from "../screens/ForgotPassword/ForgotPassoword";
 
@@ -13,12 +13,20 @@ export default function Routing() {
         <div className="app-wrapper">
             <div className="app-wrapper-content">
 
-                <BrowserRouter>
+                <HashRouter>
+                    <Navigation/>
                     <Switch>
                         {/*<PrivateRoute component={HomePage} path={PATH.HOME}/>*/}
-                        <Route exact component={Login} path={PATH.LOGIN}/>
-                        <Route exact component={HomePage} path={PATH.HOME}/>
-                        <Route exact component={Registration} path={PATH.REGISTER}/>
+                        <Route exact
+                               component={Login}
+                               // render={() => Login}
+                               path={PATH.LOGIN}/>
+                        <Route exact
+                               component={HomePage}
+                               path={PATH.HOME}/>
+                        <Route exact
+                               component={Registration}
+                               path={PATH.REGISTER}/>
                         <Route
                             exact
                             path="/forgotpassword"
@@ -26,11 +34,11 @@ export default function Routing() {
                         />
                         <Route
                             exact
-                            path="/passwordreset/:token"
+                            path="/set-new-password/:token"
                             component={ResetPassword}
                         />
                     </Switch>
-                </BrowserRouter>
+                </HashRouter>
             </div>
         </div>
     )

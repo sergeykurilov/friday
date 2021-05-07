@@ -12,7 +12,8 @@ function classNames(...classes: string[]) {
 
 export const PATH = {
     LOGIN: "/login",
-    RESET: "/forgotpassword",
+    FORGOT: "/forgotpassword",
+    RESET: "/set-new-password",
     REGISTER: "/register",
     HOME: "/home"
 }
@@ -47,12 +48,12 @@ export function Navigation() {
                                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                                         {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                                         <NavLink
-                                            className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                            className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                                             to={PATH.HOME}>
                                             Home
                                         </NavLink>
                                         <NavLink
-                                            className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                            className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                                             to={PATH.LOGIN}>
                                             Login
                                         </NavLink>
