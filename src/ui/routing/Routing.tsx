@@ -7,6 +7,7 @@ import {ResetPassword} from "../screens/ResetPassword/ResetPassword";
 import {ForgotPassword} from "../screens/ForgotPassword/ForgotPassoword";
 
 import {HomePage} from "../screens/HomePage/HomePage";
+import Packs from "../screens/Packs/Packs";
 
 export default function Routing() {
     return (
@@ -31,6 +32,11 @@ export default function Routing() {
                             exact
                             path="/forgotpassword"
                             component={ForgotPassword}
+                        />
+                        <Route
+                            exact
+                            path="/packs"
+                            component={Packs}
                         />
                         <Route
                             exact

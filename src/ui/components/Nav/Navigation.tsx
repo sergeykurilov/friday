@@ -14,6 +14,7 @@ export const PATH = {
     LOGIN: "/login",
     FORGOT: "/forgotpassword",
     RESET: "/set-new-password",
+    PACKS: "/packs",
     REGISTER: "/register",
     HOME: "/home"
 }
@@ -21,11 +22,8 @@ export const PATH = {
 
 
 export function Navigation() {
-
-
     // const isAuth = useSelector((state:any) => state.authorization.isAuth)
     // const dispatch = useDispatch()
-
     return (
             <Disclosure as="nav" className="bg-white shadow">
                 {({open}) => (
@@ -71,6 +69,11 @@ export function Navigation() {
                                             className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                                             to={PATH.RESET}>
                                             Reset Password
+                                        </NavLink>
+                                        <NavLink
+                                            className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                            to={PATH.PACKS}>
+                                            Packs
                                         </NavLink>
                                     </div>
                                 </div>
