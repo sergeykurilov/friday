@@ -11,13 +11,9 @@ import {createCardsTC, deleteCardsTC, getCardsTC, updateCardsTC} from "../../red
 
 export const Cards = () => {
     const {_id}:{_id: string} = useParams();
-    console.log(_id)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        console.log("GET CARDS")
-        dispatch(getCardsTC(_id));
-    }, [dispatch, _id]);
+
 
     const cards: CardsType[] = useTypedSelector(state => state.cards.cards)
     const isAuth: boolean = useTypedSelector(state => state.login.isAuth)
@@ -45,8 +41,13 @@ export const Cards = () => {
             type: "card", // если не отправить будет таким
         }
     }
-    let addPackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(createCardsTC(cardsPackData));
 
+
+    let addPackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(createCardsTC(cardsPackData));
+    useEffect(() => {
+        console.log("GET CARDS")
+        dispatch(getCardsTC(_id));
+    }, [dispatch, _id]);
 
     // if(isAuth){
     //     return <Redirect to={PATH.LOGIN}/>
@@ -106,6 +107,20 @@ export const Cards = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                 {cards?.map((cards) => {
+                    const updatedQuestion: any = {
+                        cardsPack_id: "609944dfe00ab80004f46989",
+                        _id: cards._id,
+                        question: "nopenopenope", // если не отправить будет таким
+                        answer: "no answer", // если не отправить будет таким
+                        grade: 0, // 0..5, не обязателен
+                        shots: 0, // не обязателен
+                        rating: 0, // не обязателен
+                        answerImg: "base 64", // не обязателен
+                        questionImg: "base 64", // не обязателен
+                        questionVideo: "base 64", // не обязателен
+                        answerVideo: "base 64", // не обязателен
+                        type: "card", // если не отправить будет таким
+                    }
                     return (
                         <tr>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.question}</td>
@@ -129,7 +144,7 @@ export const Cards = () => {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        return dispatch(updateCardsTC(cards))
+                                        return dispatch(updateCardsTC(updatedQuestion))
                                     }}
                                     type="button"
                                     className="inline-flex mr-2 items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

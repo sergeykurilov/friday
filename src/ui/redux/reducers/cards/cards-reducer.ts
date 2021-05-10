@@ -23,8 +23,8 @@ export default function cardsReducer(state = initialState, action: ActionsType):
         case ActionTypes.ADD_CARDS:
             return {
                 ...state,
-                cards: [action.payload.newCards,
-                ...state.cards]}
+                ...action.payload.newCards
+                }
         case ActionTypes.SET_CARDS:
             return {
                     ...state,

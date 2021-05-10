@@ -37,11 +37,10 @@ export const deleteCardsTC = (cardsPack_id: string) => (dispatch: ThunkDispatch<
         })
 }
 
-export const updateCardsTC = (card: CardsType) => (dispatch: ThunkDispatch<RootStateType, unknown, ActionsType>) => {
-    return CardsAPI.updateCards(card)
+export const updateCardsTC = (cards: CardsType) => (dispatch: ThunkDispatch<RootStateType, unknown, ActionsType>) => {
+    return CardsAPI.updateCards(cards)
         .then((res) => {
-            const cardsPack_id = res.data.card.cardsPack_id
-            dispatch(getCardsTC(cardsPack_id))
+            dispatch(getCardsTC(res.data.card.cardsPack_id))
         })
         .catch((err) => {
             console.error(err)

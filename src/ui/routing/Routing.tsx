@@ -9,8 +9,12 @@ import {ForgotPassword} from "../screens/ForgotPassword/ForgotPassoword";
 import {HomePage} from "../screens/HomePage/HomePage";
 import Packs from "../screens/Packs/Packs";
 import {Cards} from "../screens/Cards/Cards";
+import {useSelector} from "react-redux";
+import {RootStateType} from "../redux/store/store";
 
 export default function Routing() {
+    const isAuth = useSelector((state:RootStateType) => state.login.isAuth)
+
     return (
         <div className="app-wrapper">
             <div className="app-wrapper-content">

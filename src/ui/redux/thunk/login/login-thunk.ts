@@ -14,6 +14,18 @@ export const loginTC = ({...loginData}: LoginRequestType) => {
     }
 }
 
+export const logoutTC = () => {
+    return async (dispatch: Dispatch<LoginActionsType>) => {
+        dispatch(login(undefined, false))
+        loginAPI.meDelete().then((res) => {
+            console.log(res)
+            dispatch(logout())
+            localStorage.removeItem('token')
+        })
+    }
+}
+
+
 export const setAuthUserData = () => async (dispatch: Dispatch<LoginActionsType>) => {
     let data = await loginAPI.me();
     if (localStorage.getItem("token")) {

@@ -110,20 +110,22 @@ const Packs = () => {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
+                                    Cards Count
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
                                     Shots
                                 </th>
+
                                 <th
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
                                     Grade
                                 </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    Cards Count
-                                </th>
+
                                 <th
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -151,6 +153,7 @@ const Packs = () => {
                             <tbody className="bg-white divide-y divide-gray-200">
                             {cardsPack?.map((cards: ICardsPackType) => {
                                 const deletePackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(deletePacksTC(cards._id));
+
                                 return (
                                     <tr>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards._id}</td>
