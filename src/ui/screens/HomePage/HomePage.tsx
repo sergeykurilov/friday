@@ -24,6 +24,7 @@ export const HomePage = (props: any) => {
         <div style={{maxWidth: "80%", margin: "auto"}}>
             <img src={user?.avatar} alt=""/>
             <p>{user?.email}</p>
+            <p>{user?._id}</p>
             <p>{user?.name}</p>
         </div>
     )

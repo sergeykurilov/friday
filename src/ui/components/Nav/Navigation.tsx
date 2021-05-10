@@ -15,6 +15,7 @@ export const PATH = {
     FORGOT: "/forgotpassword",
     RESET: "/set-new-password",
     PACKS: "/packs",
+    CARDS: "/cards/",
     REGISTER: "/register",
     HOME: "/home"
 }
@@ -74,6 +75,11 @@ export function Navigation() {
                                             className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                                             to={PATH.PACKS}>
                                             Packs
+                                        </NavLink>
+                                        <NavLink
+                                            className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                            to={PATH.CARDS}>
+                                            Cards
                                         </NavLink>
                                     </div>
                                 </div>

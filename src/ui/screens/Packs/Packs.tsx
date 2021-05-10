@@ -5,6 +5,9 @@ import {deletePacksTC, getPacksTC, setPacksTC, updatePacksTC} from "../../redux/
 import {PacksActionsType} from "../../redux/reducers/packs/packs-reducer";
 import {Dispatch} from "redux";
 import {ICardsPack} from "../../../server/api";
+import { Link } from 'react-router-dom';
+import {PATH} from "../../components/Nav/Navigation";
+import Pagination from "../../components/Pagination/Pagination";
 
 interface ICardsPackType {
     _id: string
@@ -34,6 +37,10 @@ const Packs = () => {
     let cardsPack = useSelector<RootStateType, any>((state) => {
         return state.packs.cardPacks
     })
+
+    let packs = useSelector<RootStateType, any>((state) => {
+        return state.packs
+    })
     const cardsPackData: any = {
         cardsPack: {
             name: "no Name", // если не отправить будет таким
@@ -55,7 +62,10 @@ const Packs = () => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [])
+    }, [dispatch])
+
+
+
 
 
     return (
@@ -74,7 +84,7 @@ const Packs = () => {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                    User Id
+                                    Pack Id
                                 </th>
                                 <th
                                     scope="col"
@@ -112,6 +122,12 @@ const Packs = () => {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
+                                    Cards Count
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
                                     Path
                                 </th>
                                 <th
@@ -137,8 +153,7 @@ const Packs = () => {
                                 const deletePackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(deletePacksTC(cards._id));
                                 return (
                                     <tr>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.user_id}</td>
-
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards._id}</td>
                                         {cardId === cards._id && open ?
                                             <input type="text"
                                                    onBlur={() => {
@@ -161,10 +176,10 @@ const Packs = () => {
                                         }
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.created}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.rating}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.cardsCount}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.shots}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.grade}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.path}</td>
-
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <button
                                                 onClick={deletePackResolver}
@@ -180,9 +195,9 @@ const Packs = () => {
                                             >
                                                 Update
                                             </button>
-                                            <a href="#">
+                                            <Link to={`${PATH.CARDS}${cards._id}`}>
                                                 Cards
-                                            </a>
+                                            </Link>
                                         </td>
                                     </tr>
                                 );
@@ -192,6 +207,7 @@ const Packs = () => {
                     </div>
                 </div>
             </div>
+            <Pagination cardsPack={packs}/>
         </div>
     )
 }

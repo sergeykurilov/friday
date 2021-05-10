@@ -4,11 +4,13 @@ import {registrationReducer} from "../reducers/registration/registration-reducer
 import {loginReducer} from "../reducers/registration/login-reducer";
 import {useSelector, TypedUseSelectorHook} from "react-redux";
 import packsReducer from "../reducers/packs/packs-reducer";
+import cardsReducer from "../reducers/cards/cards-reducer";
 
 const rootReducer = combineReducers({
     registration: registrationReducer,
     login: loginReducer,
     packs: packsReducer,
+    cards: cardsReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>
