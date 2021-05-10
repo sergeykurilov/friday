@@ -2,15 +2,22 @@ import React, {useState} from 'react';
 import {useTypedSelector} from "../../redux/store/store";
 import {useDispatch} from "react-redux";
 import {CardsType} from "../../../server/api";
+import {Redirect} from "react-router-dom";
+import {PATH} from "../../components/Nav/Navigation";
 
 export const Cards = () => {
 
     const cards: CardsType[] = useTypedSelector(state => state.cards.cards)
+    const isAuth: boolean = useTypedSelector(state => state.login.isAuth)
     const [editMode, setEditMode] = useState<boolean>(false)
-    let [newQuestion, setNewQuestion] = useState<string>("")
-    let [newAnswer, setAnswer] = useState<string>("")
+    const [newQuestion, setNewQuestion] = useState<string>("")
+    const [newAnswer, setAnswer] = useState<string>("")
     const dispatch = useDispatch()
 
+
+    if(isAuth){
+        return <Redirect to={PATH.LOGIN}/>
+    }
 
     return (
         <div>
