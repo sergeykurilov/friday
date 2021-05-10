@@ -5,6 +5,8 @@ import {deletePacksTC, getPacksTC, setPacksTC, updatePacksTC} from "../../redux/
 import {PacksActionsType} from "../../redux/reducers/packs/packs-reducer";
 import {Dispatch} from "redux";
 import {ICardsPack} from "../../../server/api";
+import { Link } from 'react-router-dom';
+import {PATH} from "../../components/Nav/Navigation";
 
 interface ICardsPackType {
     _id: string
@@ -112,6 +114,12 @@ const Packs = () => {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
+                                    Cards Count
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
                                     Path
                                 </th>
                                 <th
@@ -138,7 +146,6 @@ const Packs = () => {
                                 return (
                                     <tr>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.user_id}</td>
-
                                         {cardId === cards._id && open ?
                                             <input type="text"
                                                    onBlur={() => {
@@ -161,6 +168,7 @@ const Packs = () => {
                                         }
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.created}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.rating}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.cardsCount}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.shots}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.grade}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards.path}</td>
@@ -180,9 +188,9 @@ const Packs = () => {
                                             >
                                                 Update
                                             </button>
-                                            <a href="#">
+                                            <Link to={`${PATH.CARDS}`}>
                                                 Cards
-                                            </a>
+                                            </Link>
                                         </td>
                                     </tr>
                                 );

@@ -8,6 +8,7 @@ import {ForgotPassword} from "../screens/ForgotPassword/ForgotPassoword";
 
 import {HomePage} from "../screens/HomePage/HomePage";
 import Packs from "../screens/Packs/Packs";
+import {Cards} from "../screens/Cards/Cards";
 
 export default function Routing() {
     return (
@@ -17,10 +18,8 @@ export default function Routing() {
                 <HashRouter>
                     <Navigation/>
                     <Switch>
-                        {/*<PrivateRoute component={HomePage} path={PATH.HOME}/>*/}
                         <Route exact
                                component={Login}
-                               // render={() => Login}
                                path={PATH.LOGIN}/>
                         <Route exact
                                component={HomePage}
@@ -30,13 +29,18 @@ export default function Routing() {
                                path={PATH.REGISTER}/>
                         <Route
                             exact
-                            path="/forgotpassword"
+                            path={PATH.FORGOT}
                             component={ForgotPassword}
                         />
                         <Route
                             exact
-                            path="/packs"
+                            path={PATH.PACKS}
                             component={Packs}
+                        />
+                        <Route
+                            exact
+                            path={PATH.CARDS}
+                            component={Cards}
                         />
                         <Route
                             exact

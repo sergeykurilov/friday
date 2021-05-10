@@ -40,11 +40,11 @@ export const packsAPI = {
             return response.data
         })
     },
-    deleteCards(_id: string){
+    deleteCards(_id: string) {
         return instance.delete(`cards/pack/?id=${_id}`)
     },
-    updateCards(_id: string, name: string){
-        return instance.put(`cards/pack`,{cardsPack: {_id, name}})
+    updateCards(_id: string, name: string) {
+        return instance.put(`cards/pack`, {cardsPack: {_id, name}})
     }
 }
 
@@ -90,16 +90,52 @@ export interface IResponsePacksType {
 }
 
 
-// export const auth =  () => {
-//     return async (dispatch:any) => {
-//         try {
-//             const response: any = await instance.post(`/auth/me`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
-//             dispatch(response)
-//             console.log(response)
-//             localStorage.setItem('token', response.data.in)
-//         }
-//         catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }
+export const CardsAPI = {
+    getCards(_id: string) {
+        return instance.get<getCardsResponseType>(`cards/card?cardsPack_id=${_id}`)
+    },
+    createCards(cards: CardsType) {
+        return instance.post(`cards/card/`,{cards})
+    },
+    deleteCards(cardsPack_id: string) {
+        return instance.delete<deleteCardsResponseType>(`cards/card/?id=${cardsPack_id}`)
+    },
+    updateCards(card: CardsType) {
+        return instance.put<updatedCardResponseType>(`cards/card`, {card})
+    }
+}
+
+ type getCardsResponseType = {
+    cards: CardsType[],
+    page: number,
+    pageCount: number,
+    cardsTotalCount: number,
+    packUserId: string,
+}
+
+ type deleteCardsResponseType = {
+    deletedCard: {
+        cardsPack_id: string
+    }
+}
+
+export type CardsType = {
+        answer: string
+        question: string
+        cardsPack_id: string
+        grade: number
+        rating: number
+        shots: number
+        type: string
+        user_id: string
+        created: string
+        updated: string
+        __v: number
+        _id: string
+    }
+
+type updatedCardResponseType = {
+    card: {
+        cardsPack_id: string
+    }
+}
