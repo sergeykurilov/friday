@@ -39,7 +39,7 @@ export default function Routing() {
                         />
                         <Route
                             exact
-                            path={PATH.CARDS}
+                            path={"/cards/:_id"}
                             component={Cards}
                         />
                         <Route

@@ -7,9 +7,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
 
+}
+td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 {
+  max-width: 9em;
+}
 input[type="checkbox"] {
   margin-left: 4em;
 }

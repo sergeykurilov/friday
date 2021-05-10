@@ -15,7 +15,7 @@ export const PATH = {
     FORGOT: "/forgotpassword",
     RESET: "/set-new-password",
     PACKS: "/packs",
-    CARDS: "/cards",
+    CARDS: "/cards/",
     REGISTER: "/register",
     HOME: "/home"
 }
