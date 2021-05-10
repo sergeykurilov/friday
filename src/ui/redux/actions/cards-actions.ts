@@ -19,7 +19,6 @@ export const setCardsGrade = (_id: string,grade:number) => ({
     type: ActionTypes.SET_CARDS_GRADE, payload: {_id,grade}
 } as const)
 
-
 export type FilteredCardsType = {
     minGrade: number
     maxGrade: number

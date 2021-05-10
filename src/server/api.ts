@@ -26,11 +26,17 @@ export const loginAPI = {
                 console.log(response)
                 return response.data;
             });
+    },
+    meDelete() {
+        return instance
+            .delete<any>(`auth/me`, {})
+            .then((response) => {
+                return response.data;
+            });
     }
 }
 
 export const packsAPI = {
-
     // async getCards(packUser_id: string) {
     async getCards() {
         const response = await instance.get<IResponsePacksType>(

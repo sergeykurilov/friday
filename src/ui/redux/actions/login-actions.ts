@@ -6,6 +6,8 @@ export const login = (user: userType | undefined, isAuth: boolean) => ({
 } as const)
 
 
+
+
 export type userType = {
     _id: string
     email: string
