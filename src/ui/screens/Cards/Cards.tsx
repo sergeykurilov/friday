@@ -15,7 +15,7 @@ export const Cards = () => {
     const dispatch = useDispatch()
 
 
-    if(isAuth){
+    if(!isAuth){
         return <Redirect to={PATH.LOGIN}/>
     }
 
