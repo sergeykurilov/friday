@@ -12,17 +12,18 @@ export const getCardsTC = (_id: string) => (dispatch: Dispatch<ActionsType>) => 
             dispatch(setCards(res.data.cards))
         })
         .catch((err) => {
-            console.error(err)
+            console.log(err)
         })
 }
 
 export const createCardsTC = (newCards: CardsType) => (dispatch: ThunkDispatch<RootStateType, unknown, ActionsType>) => {
     return CardsAPI.createCards(newCards)
         .then((res) => {
+            console.log(res)
             dispatch(getCardsTC(newCards.cardsPack_id))
         })
         .catch((err) => {
-            console.error(err)
+            alert(err)
         })
 }
 
@@ -32,15 +33,14 @@ export const deleteCardsTC = (cardsPack_id: string) => (dispatch: ThunkDispatch<
             dispatch(getCardsTC(res.data.deletedCard.cardsPack_id))
         })
         .catch((err) => {
-            console.error(err)
+            console.log(err)
         })
 }
 
-export const updateCardsTC = (card: CardsType) => (dispatch: ThunkDispatch<RootStateType, unknown, ActionsType>) => {
-    return CardsAPI.updateCards(card)
+export const updateCardsTC = (cards: CardsType) => (dispatch: ThunkDispatch<RootStateType, unknown, ActionsType>) => {
+    return CardsAPI.updateCards(cards)
         .then((res) => {
-            const cardsPack_id = res.data.card.cardsPack_id
-            dispatch(getCardsTC(cardsPack_id))
+            dispatch(getCardsTC(res.data.card.cardsPack_id))
         })
         .catch((err) => {
             console.error(err)

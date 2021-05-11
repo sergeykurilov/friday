@@ -26,10 +26,45 @@ export const loginAPI = {
                 console.log(response)
                 return response.data;
             });
+    },
+    meDelete() {
+        return instance
+            .delete<any>(`auth/me`, {})
+            .then((response) => {
+                return response.data;
+            });
     }
 }
 
 export const packsAPI = {
+    // async getCards(packUser_id: string) {
+    async getCards() {
+        const response = await instance.get<IResponsePacksType>(
+            `/cards/pack?`
+            + `pageCount=10`
+            + `&page=1`
+            // + (packUser_id ? `&user_id=${packUser_id}` : "")
+            // + `&packName=o`
+            // + `&min=2`
+            // + `&max=2`
+            + `&sortPacks=0updated`
+        );
+        return response.data;
+    },
+    setCard(packData: ICardsPack) {
+        return instance.post<ICardsPack>(`cards/pack`, {...packData}).then((response) => {
+            return response.data
+        })
+    },
+    deleteCards(_id: string) {
+        return instance.delete(`cards/pack/?id=${_id}`)
+    },
+    updateCards(_id: string, name: string) {
+        return instance.put(`cards/pack`, {cardsPack: {_id, name}})
+    }
+}
+
+export const cardsAPI = {
     getCards() {
         return instance.get<IResponsePacksType>(`cards/pack`).then((response) => {
             return response.data
@@ -47,6 +82,7 @@ export const packsAPI = {
         return instance.put(`cards/pack`, {cardsPack: {_id, name}})
     }
 }
+
 
 type deckCoverType = "url" | "base64"
 
@@ -91,11 +127,18 @@ export interface IResponsePacksType {
 
 
 export const CardsAPI = {
-    getCards(_id: string) {
-        return instance.get<getCardsResponseType>(`cards/card?cardsPack_id=${_id}`)
+    async getCards(cardsPack_id: string) {
+        const response = await instance.get<getCardsResponseType>(`/cards/card?`
+            + `cardsPack_id=${cardsPack_id}`
+            + "&pageCount=1000"
+            // + "&cardQuestion=ne"
+            // + "&min=2"
+            // + "&max=3"
+        );
+        return response
     },
-    createCards(cards: CardsType) {
-        return instance.post(`cards/card/`,{cards})
+    createCards(cardsPack: CardsType) {
+        return instance.post(`cards/card/`, cardsPack)
     },
     deleteCards(cardsPack_id: string) {
         return instance.delete<deleteCardsResponseType>(`cards/card/?id=${cardsPack_id}`)
@@ -105,7 +148,7 @@ export const CardsAPI = {
     }
 }
 
- type getCardsResponseType = {
+type getCardsResponseType = {
     cards: CardsType[],
     page: number,
     pageCount: number,
@@ -113,26 +156,26 @@ export const CardsAPI = {
     packUserId: string,
 }
 
- type deleteCardsResponseType = {
+type deleteCardsResponseType = {
     deletedCard: {
         cardsPack_id: string
     }
 }
 
 export type CardsType = {
-        answer: string
-        question: string
-        cardsPack_id: string
-        grade: number
-        rating: number
-        shots: number
-        type: string
-        user_id: string
-        created: string
-        updated: string
-        __v: number
-        _id: string
-    }
+    answer: string
+    question: string
+    cardsPack_id: string
+    grade: number
+    rating: number
+    shots: number
+    type: string
+    user_id: string
+    created: string
+    updated: string
+    __v: number
+    _id: string
+}
 
 type updatedCardResponseType = {
     card: {
