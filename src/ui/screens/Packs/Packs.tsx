@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {RootStateType} from "../../redux/store/store";
+import {RootStateType, useTypedSelector} from "../../redux/store/store";
 import {deletePacksTC, getPacksTC, setPacksTC, updatePacksTC} from "../../redux/thunk/packs/packs-thunk";
 import {PacksActionsType} from "../../redux/reducers/packs/packs-reducer";
 import {Dispatch} from "redux";
-import {ICardsPack} from "../../../server/api";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {PATH} from "../../components/Nav/Navigation";
-import Pagination from "../../components/Pagination/Pagination";
+import {Pagination} from "../../components/Pagination/Pagination";
 
 interface ICardsPackType {
     _id: string
@@ -65,10 +64,13 @@ const Packs = () => {
     }, [dispatch])
 
 
+    const currentPage = useTypedSelector(state => state.packs.page)
+    const totalCount = useTypedSelector(state => Math.ceil(state.packs.cardPacksTotalCount/state.packs.pageCount))
 
 
 
     return (
+
         <div className="mt-4 flex flex-col">
             <div className="-my-1  sm:-mx-5 lg:-mx-5">
                 <label className="inline-flex items-center mt-3">
@@ -154,6 +156,7 @@ const Packs = () => {
                             {cardsPack?.map((cards: ICardsPackType) => {
                                 const deletePackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(deletePacksTC(cards._id));
 
+
                                 return (
                                     <tr>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{cards._id}</td>
@@ -210,7 +213,7 @@ const Packs = () => {
                     </div>
                 </div>
             </div>
-            <Pagination cardsPack={packs}/>
+            <Pagination currentPage={currentPage} numberOfPages={totalCount} changePage={(page)=>dispatch(getPacksTC(page))}/>
         </div>
     )
 }

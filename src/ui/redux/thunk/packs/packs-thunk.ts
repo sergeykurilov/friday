@@ -5,9 +5,9 @@ import {Dispatch} from "redux";
 import {PacksActionsType} from "../../reducers/packs/packs-reducer";
 
 
-export const getPacksTC = () => (dispatch: Dispatch<PacksActionsType>) => {
+export const getPacksTC = (page?: number) => (dispatch: Dispatch<PacksActionsType>) => {
     dispatch(loadingPacks(false))
-    return packsAPI.getCards()
+    return packsAPI.getCards(page)
         .then((res: IResponsePacksType | undefined) => {
             console.log(res)
             dispatch(getPacks(res))

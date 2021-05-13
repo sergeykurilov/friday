@@ -1,30 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {RootStateType, useTypedSelector} from "../../redux/store/store";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect} from 'react';
+import {useTypedSelector} from "../../redux/store/store";
+import {useDispatch} from "react-redux";
 import {CardsType} from "../../../server/api";
-import {Redirect, useParams} from "react-router-dom";
-import {PATH} from "../../components/Nav/Navigation";
+import {useParams} from "react-router-dom";
 import {Dispatch} from "redux";
 import {PacksActionsType} from "../../redux/reducers/packs/packs-reducer";
-import {getPacksTC, setPacksTC} from "../../redux/thunk/packs/packs-thunk";
 import {createCardsTC, deleteCardsTC, getCardsTC, updateCardsTC} from "../../redux/thunk/cards/cards-thunk";
 
 export const Cards = () => {
     const {_id}:{_id: string} = useParams();
     const dispatch = useDispatch()
 
-
-
     const cards: CardsType[] = useTypedSelector(state => state.cards.cards)
-    const isAuth: boolean = useTypedSelector(state => state.login.isAuth)
-    const [editMode, setEditMode] = useState<boolean>(false)
-    const [newQuestion, setNewQuestion] = useState<string>("")
-    const [newAnswer, setAnswer] = useState<string>("")
-
-    /*
-    * {"newCardsPack":{"_id":"609931cce00ab80004f46983","user_id":"5eecf82a3ed8f700042f1186","user_name":"Ignat","private":false,"name":"no Name","path":"/def","grade":0,"shots":0,"cardsCount":0,"type":"card","rating":0,"created":"2021-05-10T13:14:52.121Z","updated":"2021-05-10T13:14:52.121Z","more_id":"5eecf82a3ed8f700042f1186","__v":0},"token":"b46b7e90-b191-11eb-a9c6-e598fed4fb3d","tokenDeathTime":1620663292025}
-    *
-    * */
+    // const isAuth: boolean = useTypedSelector(state => state.login.isAuth)
+    // const [editMode, setEditMode] = useState<boolean>(false)
+    // const [newQuestion, setNewQuestion] = useState<string>("")
+    // const [newAnswer, setAnswer] = useState<string>("")
+    //
+    // /*
+    // * {"newCardsPack":{"_id":"609931cce00ab80004f46983","user_id":"5eecf82a3ed8f700042f1186","user_name":"Ignat","private":false,"name":"no Name","path":"/def","grade":0,"shots":0,"cardsCount":0,"type":"card","rating":0,"created":"2021-05-10T13:14:52.121Z","updated":"2021-05-10T13:14:52.121Z","more_id":"5eecf82a3ed8f700042f1186","__v":0},"token":"b46b7e90-b191-11eb-a9c6-e598fed4fb3d","tokenDeathTime":1620663292025}
+    // *
+    // * */
     console.log(cards)
     const cardsPackData: any = {
         card: {
@@ -52,6 +48,10 @@ export const Cards = () => {
     // if(isAuth){
     //     return <Redirect to={PATH.LOGIN}/>
     // }
+    const currentPage = useTypedSelector(state => state.packs.page)
+    const totalCount = useTypedSelector(state => state.packs.cardPacksTotalCount)
+
+
 
     return (
         <div>
