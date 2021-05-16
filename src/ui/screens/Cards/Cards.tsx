@@ -16,7 +16,6 @@ export const Cards = () => {
 
 
     const cards: CardsType[] = useTypedSelector(state => state.cards.cards)
-    const isAuth: boolean = useTypedSelector(state => state.login.isAuth)
     const [editMode, setEditMode] = useState<boolean>(false)
     const [newQuestion, setNewQuestion] = useState<string>("")
     const [newAnswer, setAnswer] = useState<string>("")
@@ -55,9 +54,15 @@ export const Cards = () => {
 
     return (
         <div>
+
+            
+
+
             <label className="inline-flex items-center mt-3">
                 <span className="ml-2 text-gray-700">Cards</span>
             </label>
+
+
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                 <tr>
