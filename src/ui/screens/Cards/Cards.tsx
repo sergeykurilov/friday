@@ -12,16 +12,6 @@ export const Cards = () => {
     const dispatch = useDispatch()
 
     const cards: CardsType[] = useTypedSelector(state => state.cards.cards)
-    // const isAuth: boolean = useTypedSelector(state => state.login.isAuth)
-    // const [editMode, setEditMode] = useState<boolean>(false)
-    // const [newQuestion, setNewQuestion] = useState<string>("")
-    // const [newAnswer, setAnswer] = useState<string>("")
-    //
-    // /*
-    // * {"newCardsPack":{"_id":"609931cce00ab80004f46983","user_id":"5eecf82a3ed8f700042f1186","user_name":"Ignat","private":false,"name":"no Name","path":"/def","grade":0,"shots":0,"cardsCount":0,"type":"card","rating":0,"created":"2021-05-10T13:14:52.121Z","updated":"2021-05-10T13:14:52.121Z","more_id":"5eecf82a3ed8f700042f1186","__v":0},"token":"b46b7e90-b191-11eb-a9c6-e598fed4fb3d","tokenDeathTime":1620663292025}
-    // *
-    // * */
-    console.log(cards)
     const cardsPackData: any = {
         card: {
             cardsPack_id: "609944dfe00ab80004f46989",
@@ -40,17 +30,12 @@ export const Cards = () => {
 
 
     let addPackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(createCardsTC(cardsPackData));
+
+
     useEffect(() => {
         console.log("GET CARDS")
         dispatch(getCardsTC(_id));
     }, [dispatch, _id]);
-
-    // if(isAuth){
-    //     return <Redirect to={PATH.LOGIN}/>
-    // }
-    const currentPage = useTypedSelector(state => state.packs.page)
-    const totalCount = useTypedSelector(state => state.packs.cardPacksTotalCount)
-
 
 
     return (
