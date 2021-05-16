@@ -1,5 +1,5 @@
 import {ActionTypes} from "../../constants/constants";
-import {deletePacks, getPacks, loadingPacks, setPacks, updatePacks} from "../../actions/packs-actions";
+import {deletePacks, getPacks, loadingPacks, setCurrentPage, setPacks, updatePacks} from "../../actions/packs-actions";
 
 
 const initialState = {
@@ -27,7 +27,13 @@ const initialState = {
     loading: false,
 }
 
-export type PacksActionsType = GetActionPacksType | LoadingPacksType | SetActionPacksType | DeletePacksType | UpdatePacksType
+export type PacksActionsType =
+    GetActionPacksType
+    | LoadingPacksType
+    | SetActionPacksType
+    | DeletePacksType
+    | UpdatePacksType
+    | SetCurrentPageType
 
 
 type GetActionPacksType = ReturnType<typeof getPacks>
@@ -35,38 +41,49 @@ type SetActionPacksType = ReturnType<typeof setPacks>
 type LoadingPacksType = ReturnType<typeof loadingPacks>
 type DeletePacksType = ReturnType<typeof deletePacks>
 type UpdatePacksType = ReturnType<typeof updatePacks>
+type SetCurrentPageType = ReturnType<typeof setCurrentPage>
 
 export type InitialPacksStateType = typeof initialState
-
 
 
 export default function packsReducer(state = initialState, action: PacksActionsType): InitialPacksStateType {
     //// Собрать все редюсеры в один кейс (будет один пейлоад и стейт :) )
     switch (action.type) {
         case ActionTypes.GET_PACKS:
-            return {
-                ...state,
-                ...action.payload
-            }
         case ActionTypes.LOADING_PACKS:
-            return {
-                ...state,
-                ...action.payload
-            }
+        case ActionTypes.DELETE_PACKS:
+        case ActionTypes.SET_CURRENT_PAGE:
         case ActionTypes.SET_PACKS:
             return {
                 ...state,
                 ...action.payload
             }
-        case ActionTypes.DELETE_PACKS:
-            return {
-                ...state,
-                ...action.payload
-            }
-
         default:
             return state
     }
 }
+
+
+
+export function createPages(pages: number[] = [], pageCount: number, page: number) {
+    if (page > 10) {
+        if (page > 5) {
+            for (let i = page - 4; i <= page + 5; i++) {
+                pages.push(i)
+                if (i == pageCount) break
+            }
+        } else {
+            for (let i = 1; i <= 10; i++) {
+                pages.push(i)
+                if (i == pageCount) break
+            }
+        }
+    } else {
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i)
+        }
+    }
+}
+
 
 

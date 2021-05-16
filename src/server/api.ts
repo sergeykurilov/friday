@@ -38,11 +38,11 @@ export const loginAPI = {
 
 export const packsAPI = {
     // async getCards(packUser_id: string) {
-    async getCards() {
+    async getCards(page = 1) {
         const response = await instance.get<IResponsePacksType>(
             `/cards/pack?`
             + `pageCount=10`
-            + `&page=1`
+            + `&page=${page}`
             // + (packUser_id ? `&user_id=${packUser_id}` : "")
             // + `&packName=o`
             // + `&min=2`

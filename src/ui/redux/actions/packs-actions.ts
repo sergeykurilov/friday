@@ -1,15 +1,13 @@
 import {ActionTypes} from "../constants/constants";
-import {InitialPacksStateType} from "../reducers/packs/packs-reducer";
-import {CardPacks, ICardsPack, IResponsePacksType} from "../../../server/api";
-import {AxiosResponse} from "axios";
+import {ICardsPack, IResponsePacksType} from "../../../server/api";
 
 
 export const getPacks = (cards: IResponsePacksType | undefined) => ({
     type: ActionTypes.GET_PACKS, payload: {...cards}
 } as const)
 
-export const setPacks = (cards: ICardsPack) => ({
-    type: ActionTypes.SET_PACKS, payload: {...cards}
+export const setPacks = (packs: any) => ({
+    type: ActionTypes.SET_PACKS, payload: {...packs}
 } as const)
 
 export const deletePacks = (_id: string) => ({
@@ -23,3 +21,10 @@ export const updatePacks = (_id: string, name: string) => ({
 export const loadingPacks = (loading: boolean) => ({
     type: ActionTypes.LOADING_PACKS, payload: {loading}
 } as const)
+
+export const setCurrentPage = ( page: number) => ({
+    type: ActionTypes.SET_CURRENT_PAGE, payload: {page} } as const )
+
+
+
+
