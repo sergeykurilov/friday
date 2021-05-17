@@ -6,9 +6,13 @@ export const setCards = (cards: CardsType[]) => ({
     type: ActionTypes.SET_CARDS, payload: {cards}
 } as const)
 
-export const createCards = (newCards: CardsType) => ({
-    type: ActionTypes.ADD_CARDS, payload: {newCards}
+export const createCards = (cardsPack_id: string, question: string,answer: string) => ({
+    type: ActionTypes.ADD_CARDS, payload: {cardsPack_id, question,answer}
 } as const)
+
+export const GET_CARDS_ID = (cardsPack_id: string) => ({
+    type: ActionTypes.GET_CARDS_ID, payload: {cardsPack_id}
+} as const);
 
 
 export const setFilteredCards = (filteredCards:FilteredCardsType ) => ({

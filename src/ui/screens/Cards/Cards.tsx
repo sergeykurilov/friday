@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useTypedSelector} from "../../redux/store/store";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CardsType} from "../../../server/api";
 import {useParams} from "react-router-dom";
 import {Dispatch} from "redux";
@@ -11,7 +11,7 @@ import {ModalComponent} from '../../../common/Modal';
 export const Cards = () => {
     const {_id}: { _id: string } = useParams();
     const dispatch = useDispatch()
-
+    const cardspackId = useTypedSelector((state)=> state.cards.cardsPack_id)
     const cards: CardsType[] = useTypedSelector(state => state.cards.cards)
     const [question, setQuestion] = useState("")
     const [answer, setAnswer] = useState("")
@@ -32,13 +32,13 @@ export const Cards = () => {
     }
 
 
-    let addPackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(createCardsTC(cardsPackData));
+    let addPackResolver: () => (dispatch: Dispatch<PacksActionsType>) => Promise<void> = () => dispatch(createCardsTC("609944dfe00ab80004f46989", question,answer));
 
 
     useEffect(() => {
         console.log("GET CARDS")
         dispatch(getCardsTC(_id));
-    }, [dispatch,_id,answer,question])
+    }, [dispatch,_id,cardspackId])
 
     const [open, setOpen] = useState(false)
 
