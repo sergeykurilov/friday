@@ -1,5 +1,12 @@
 import {ActionTypes} from "../../constants/constants";
-import {createCards, FilteredCardsType, setCards, setCardsGrade, setFilteredCards} from "../../actions/cards-actions";
+import {
+    createCards,
+    FilteredCardsType,
+    GET_CARDS_ID,
+    setCards,
+    setCardsGrade,
+    setFilteredCards
+} from "../../actions/cards-actions";
 import {CardsType} from "../../../../server/api";
 
 
@@ -15,6 +22,7 @@ const initialState = {
     pageCount: 4,
     packUserId: "",
     loading: false,
+    cardsPack_id: ""
 }
 
 
@@ -23,12 +31,17 @@ export default function cardsReducer(state = initialState, action: ActionsType):
         case ActionTypes.ADD_CARDS:
             return {
                 ...state,
-                ...action.payload.newCards
+                ...action.payload
                 }
         case ActionTypes.SET_CARDS:
             return {
                     ...state,
                     cards: action.payload.cards
+            }
+        case ActionTypes.GET_CARDS_ID:
+            return {
+                ...state,
+                cardsPack_id: action.payload.cardsPack_id
             }
         case ActionTypes.SET_FILTERED_CARDS:
             return {
@@ -54,6 +67,7 @@ export type ActionsType =  ReturnType<typeof setCards>
     |  ReturnType<typeof createCards>
     |  ReturnType<typeof setFilteredCards>
     |  ReturnType<typeof setCardsGrade>
+    |  ReturnType<typeof GET_CARDS_ID>
 
 
 type InitialStateType = typeof initialState

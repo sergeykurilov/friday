@@ -6,6 +6,7 @@ module.exports = {
     theme: {
         colors: {
             primary: '#5c6ac4',
+            white: '#fff',
         },
         borderColor: (theme) => ({
             ...theme('colors'),
@@ -17,6 +18,7 @@ module.exports = {
         extend: {
             backgroundColor: ['checked'],
             borderColor: ['checked'],
+            tableLayout: ['hover', 'focus'],
         }
     },
     variants: {

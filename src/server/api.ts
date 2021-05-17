@@ -38,17 +38,27 @@ export const loginAPI = {
 
 export const packsAPI = {
     // async getCards(packUser_id: string) {
-    async getCards(page = 1) {
+    async getCards(page: number | undefined, pageCount: number | undefined) {
+        console.log(pageCount)
         const response = await instance.get<IResponsePacksType>(
             `/cards/pack?`
-            + `pageCount=10`
+            + `pageCount=${pageCount}`
             + `&page=${page}`
             // + (packUser_id ? `&user_id=${packUser_id}` : "")
             // + `&packName=o`
             // + `&min=2`
-            // + `&max=2`
-            + `&sortPacks=0updated`
+            // + `&max=${pageCount}`
+            // + `&sortPacks=0updated`
         );
+        return response.data;
+    },
+    addPack: async (name: string) => {
+        const response = await instance.post<any>("/cards/pack", {
+            cardsPack: {
+                name: name,
+            }
+        });
+
         return response.data;
     },
     setCard(packData: ICardsPack) {
@@ -134,11 +144,25 @@ export const CardsAPI = {
             // + "&cardQuestion=ne"
             // + "&min=2"
             // + "&max=3"
-        );
+        )
         return response
     },
-    createCards(cardsPack: CardsType) {
-        return instance.post(`cards/card/`, cardsPack)
+    // createCards(cardsPack: CardsType,cardsPack_id: string) {
+    //     return instance.post(`cards/card/`, {...cardsPack, cardsPack_id: cardsPack.cardsPack_id})
+    //
+    // },
+    createCards: async (cardsPack_id: string,question: string,answer: string) => {
+        const response = await instance.post<any>("/cards/card", {
+            card: {
+                cardsPack_id,
+                answer: answer,
+                question: question,
+                grade: Math.random() * 5,
+                questionImg: "some img",
+            },
+        });
+
+        return response.data;
     },
     deleteCards(cardsPack_id: string) {
         return instance.delete<deleteCardsResponseType>(`cards/card/?id=${cardsPack_id}`)

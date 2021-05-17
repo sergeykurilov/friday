@@ -6,8 +6,8 @@ export const getPacks = (cards: IResponsePacksType | undefined) => ({
     type: ActionTypes.GET_PACKS, payload: {...cards}
 } as const)
 
-export const setPacks = (packs: any) => ({
-    type: ActionTypes.SET_PACKS, payload: {...packs}
+export const setPacks = (name: string) => ({
+    type: ActionTypes.SET_PACKS, payload: {name}
 } as const)
 
 export const deletePacks = (_id: string) => ({

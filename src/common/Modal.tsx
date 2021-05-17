@@ -3,8 +3,8 @@ import React, {ChangeEvent, Fragment, useState} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/outline'
 
-export function ModalComponent({open, setOpen, setQuestion, addCard, question, answer, setAnswer} : {setAnswer: (answer: string) => void,answer: string,question: any,open: boolean, setOpen: (open: boolean) => void, setQuestion: any, addCard: any} ) {
-    console.log(question)
+export function ModalComponent({open, setOpen, setQuestion, addCard, question, answer, setAnswer} : {setAnswer?: (answer: string) => void,answer?: string,question: any,open: boolean, setOpen: (open: boolean) => void, setQuestion: any, addCard?: any} ) {
+
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" static className="fixed z-10 inset-0 overflow-y-auto" open={open} onClose={setOpen}>
@@ -62,7 +62,7 @@ export function ModalComponent({open, setOpen, setQuestion, addCard, question, a
                                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                             name="text"
                                                             value={answer}
-                                                            onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswer(e.currentTarget.value)}
+                                                            onChange={(e: ChangeEvent<HTMLInputElement>) => setAnswer ? setAnswer(e.currentTarget.value) : ""}
                                                             type="text"
                                                             required
                                                             autoFocus
@@ -72,6 +72,95 @@ export function ModalComponent({open, setOpen, setQuestion, addCard, question, a
                                                     <div className="flex items-center justify-between">
                                                         <button
                                                             onClick={addCard}
+                                                            type="button"
+                                                            className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                        >
+                                                            ADD
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </Dialog.Title>
+                                </div>
+                            </div>
+                            <div className="mt-5 sm:mt-6">
+                                <button
+                                    type="button"
+                                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                                    onClick={() => setOpen(false)}
+                                >
+                                    Go back to dashboard
+                                </button>
+                            </div>
+                        </div>
+                    </Transition.Child>
+                </div>
+            </Dialog>
+        </Transition.Root>
+    )
+}
+
+
+export function ModalPacks({open, setOpen, setQuestion, addPack, question, answer, setAnswer} : {setAnswer?: (answer: string) => void,answer?: string,question?: any,open: boolean, setOpen: (open: boolean) => void, setQuestion?: any, addPack?: any} ) {
+
+    return (
+        <Transition.Root show={open} as={Fragment}>
+            <Dialog as="div" static className="fixed z-10 inset-0 overflow-y-auto" open={open} onClose={setOpen}>
+                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    {/* This element is to trick the browser into centering the modal contents. */}
+                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+            &#8203;
+          </span>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        enterTo="opacity-100 translate-y-0 sm:scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    >
+                        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                            <div>
+                                <div className="mt-3 text-center sm:mt-5">
+                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                        <div className="flex items-center justify-center">
+                                            <div className="w-full max-w-md">
+                                                <form className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
+                                                    <div className="mb-4">
+                                                        <label
+                                                            className="block text-gray-700 text-sm font-normal mb-2"
+                                                            htmlFor="username"
+                                                        >
+                                                            Question
+                                                        </label>
+                                                        <input
+                                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                            name="question"
+                                                            value={question}
+                                                            onChange={(e: ChangeEvent<HTMLInputElement>) => setQuestion(e.currentTarget.value)}
+                                                            type="text"
+                                                            required
+                                                            autoFocus
+                                                            placeholder="Name of your card"
+                                                        />
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <button
+                                                            onClick={addPack}
                                                             type="button"
                                                             className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                         >
