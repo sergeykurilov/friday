@@ -1,5 +1,5 @@
-import {instance, loginAPI} from "../../../../server/api";
-import {isAuth, logout, setUser, userRegister, userRegisterError, userRegisterStatus} from "../../actions/regisration-actions";
+import {loginAPI} from "../../../../server/api";
+import {logout, setUser} from "../../actions/regisration-actions";
 import {Dispatch} from "redux";
 import {login, userType} from "../../actions/login-actions";
 
