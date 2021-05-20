@@ -1,4 +1,4 @@
-import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {userRegister, userRegisterError, userRegisterStatus} from "../../actions/regisration-actions";
 import {ActionTypes} from "../../constants/constants";
 
 
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export const registrationReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
-
+  //// Собрать все редюсеры в один кейс (будет один пейлоад и стейт :) )
     switch (action.type) {
         case ActionTypes.USER_REGISTER:
             return {

@@ -1,40 +1,35 @@
-import {instance, loginAPI} from "../../../../server/api";
-import {isAuth, logout, setUser, userRegister, userRegisterError, userRegisterStatus} from "../../actions/actions";
+import {loginAPI} from "../../../../server/api";
+import {logout, setUser} from "../../actions/regisration-actions";
 import {Dispatch} from "redux";
-/*
-avatar: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAA
-created: "2020-06-19T17:38:50.679Z"
-email: "nya-admin@nya.nya"
-isAdmin: false
-name: "dreamonautre@gmail.com"
-publicCardPacksCount: 190
-rememberMe: false
-token: "7530e700-a819-11eb-b991-8f0e2b993f4c"
-tokenDeathTime: 1619622085872
-updated: "2021-04-28T12:01:25.872Z"
-verified: false
-__v: 0
-_id: "5eecf82a3ed8f700042f1186"
-*/
-
+import {login, userType} from "../../actions/login-actions";
 
 
 export const loginTC = ({...loginData}: LoginRequestType) => {
     return async (dispatch: Dispatch<LoginActionsType>) => {
-        dispatch(isAuth(false))
-        loginAPI.loginUser({...loginData}).then((res:any) => {
-            console.log(res)
-            dispatch(setUser(res))
-            dispatch(isAuth(true))
+        dispatch(login(undefined, false))
+        loginAPI.loginUser({...loginData}).then((res: userType) => {
+            dispatch(login(res, true))
             localStorage.setItem('token', res.token)
         })
     }
 }
 
-export const setAuthUserData = () => async (dispatch:any) => {
+export const logoutTC = () => {
+    return async (dispatch: Dispatch<LoginActionsType>) => {
+        dispatch(login(undefined, false))
+        loginAPI.meDelete().then((res) => {
+            console.log(res)
+            dispatch(logout())
+            localStorage.removeItem('token')
+        })
+    }
+}
+
+
+export const setAuthUserData = () => async (dispatch: Dispatch<LoginActionsType>) => {
     let data = await loginAPI.me();
     if (localStorage.getItem("token")) {
-        dispatch(setUser(data));
+        dispatch(login(data, false))
     }
 };
 

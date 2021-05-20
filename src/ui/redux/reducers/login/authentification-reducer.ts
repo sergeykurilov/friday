@@ -16,8 +16,8 @@ export default function userReducer(state = defaultState, action:any) {
             localStorage.removeItem('token')
             return {
                 ...state,
-                currentUser: {},
-                isAuth: false
+                isAuth: false,
+                user: {},
             }
         default:
             return state
